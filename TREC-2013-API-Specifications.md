@@ -3,6 +3,7 @@ Please note that all details here are open to change. Discussion can be found in
 
 ### Tokenization
 The tokenizer creates a new token whenever it encounters whitespace, or one of the following characters: 
+
     _ - ? ! , ; : . ( ) [ ] @ # / \
 
 It should be noted that although the @ and # characters are used as delimiters, they are preserved in cases where they proceed a valid mention or hashtag.
