@@ -49,3 +49,129 @@ Please note that each token is surrounded by vertical bars: |
 
     :@valid testing(valid)#hashtags. RT:@meniton (the last @mention is #valid and so is this:@valid), however this is@invalid
     |@valid|test|valid|#hashtags|rt|@meniton|the|last|@mention|is|#valid|and|so|is|thi|@valid|howev|thi|is|invalid|
+
+
+
+## Indexing Details
+
+This section describes the fields from Twitter’s JSON-represented statuses that the API indexes, stores, and exposes.
+
+### Indexed Fields
+All fields are marked as Store.YES in the index, allowing users to access data from retrieved documents.  Some fields 
+are present in all statuses, while others only contain a value if the source JSON object contained a non-null entry in
+that slot.  See the table below for details.
+
+<table>
+ <tr>
+  <td>Field Name in API</td><td>Corresponding JSON element</td><td>Always Present</td> <td>Data Type</td> <td>Description</td>
+ </tr>
+ <tr>
+  <td>id</td><td>status.id</td><td>yes</td> <td>long</td> <td>The unique identifier assigned to this document by Twitter</td>
+ </tr>
+ <tr>
+  <td>screen_name</td> <td>status.user.id</td><td>yes</td> <td>String</td> <td>The Twitter screen name of the Status author</td>
+ </tr>
+ <tr>
+  <td>epoch</td> <td>NA</td><td>yes</td> <td>long</td> <td>The unix epoch (in seconds) corresponding to the created_at JSON element</td>
+ </tr>
+ <tr>
+  <td>text</td> <td>status.text</td><td>yes</td> <td>String</td> <td>The text of the status</td>
+ </tr>
+  <tr>
+  <td>retweeted_count</td><td>status_retweet_count</td> <td>yes</td> <td>long</td> <td>Number of times this status has been retweeted. Non-retweeted documents show 0</td>
+ </tr>
+ <tr>
+  <td>followers_count</td><td>status.user.followers_count</td> <td>yes</td> <td>int</td> <td>The number of followers that the author of this status has</td>
+ </tr>
+ <tr>
+  <td>statuses_count</td><td>status.user.friends_count</td> <td>yes</td> <td>int</td> <td>The number of statuses that the author of this status had at the time this status was created</td>
+ </tr>
+ <tr>
+  <td>lang</td><td>status.lang</td> <td>no</td> <td>String</td> <td>The two-character language of the status (not the user) as described by the Twitter language id system</td>
+ </tr>
+ <tr>
+  <td>in_reply_to_status_id</td><td>status.in_reply_to_status_id</td> <td>no</td> <td>long</td> <td>The unique identifier of the status that this document replies to</td>
+ </tr>
+ <tr>
+  <td>in_reply_to_user_id</td><td>status.in_reply_to_user_id</td> <td>no</td> <td>long</td> <td>The unique identifier of the user who posted the status that this document replies to</td>
+ </tr>
+ <tr>
+  <td>latitude</td><td>status.geo.coordinates[1]</td> <td>no</td> <td>double</td> <td>The latitude describing the location where the status was posted from</td>
+ </tr>
+ <tr>
+  <td>longitude</td><td>status.geo.coordinates[0]</td> <td>no</td> <td>double</td> <td>The longitude describing the location where the status was posted from</td>
+ </tr>
+</table>
+
+### Example
+Consider the following JSON object:
+
+     {
+    created_at: "Fri Mar 29 11:42:34 +0000 2013",
+    id: 317602681340432400,
+    id_str: "317602681340432384",
+    text: "@hanahani3310 alhamdulillah :)",
+    source: "<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a>",
+    truncated: false,
+    in_reply_to_status_id: 317602575803363300,
+    in_reply_to_status_id_str: "317602575803363329",
+    in_reply_to_user_id: 1054214132,
+    in_reply_to_user_id_str: "1054214132",
+    in_reply_to_screen_name: "hanahani3310",
+    user: {
+    id: 28106647,
+    id_str: "28106647",
+    name: "cheryna",
+    screen_name: "cheryna27",
+    location: "seremban-kl-seremban",
+    url: "http://cheryna.blogspot.com",
+    description: "I fart. A lot. Go away if you can't stand the smell.",
+    protected: false,
+    followers_count: 214,
+    friends_count: 174,
+    listed_count: 1,
+    created_at: "Wed Apr 01 13:39:16 +0000 2009",
+    favourites_count: 1825,
+    utc_offset: -32400,
+    time_zone: "Alaska",
+    geo_enabled: true,
+    verified: false,
+    ... snip ...
+    geo: {
+    type: "Point",
+    coordinates: [
+    3.14489609,
+    101.69596372
+    ]
+    },
+    ... snip ...
+    contributors: null,
+    retweet_count: 0,
+    favorite_count: 0,
+    favorited: false,
+    retweeted: false,
+    lang: "id"
+    }
+
+If we retrieve this document from the index into a org.apache.lucene.document.Document object called hit and then invoke:
+
+        List<IndexableField> fields = hit.getFields();
+        Iterator<IndexableField> fieldIt = fields.iterator();
+        while(fieldIt.hasNext()) {
+          IndexableField field = fieldIt.next();
+          System.out.println(field.toString());
+        }
+
+we see the following output:
+
+    stored<id:317602681340432384>
+    stored<epoch:1364557354>
+    stored,indexed,tokenized<screen_name:cheryna27>
+    stored,indexed,tokenized<text:@hanahani3310 alhamdulillah :)>
+    stored<retweet_count:0>
+    stored<in_reply_to_status_id:317602575803363329>
+    stored<in_reply_to_user_id:1054214132>
+    stored,indexed,tokenized<lang:id>
+    stored<friends_count:180>
+    stored<followers_count:160>
+    stored<statuses_count:27700>
