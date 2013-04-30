@@ -2,7 +2,7 @@
 Please note that all details here are open to change. Discussion can be found in the mailing list, and in [issue #23](https://github.com/lintool/twitter-tools/issues/23).
 
 ### Tokenization
-The tokenizer creates a new token whenever it encounters whitespace, or one of the following characters: 
+The tokenizer creates a new token whenever it encounters whitespace or one of the following characters: 
 
     _ - ? ! , ; : . ( ) [ ] @ # / \
 
