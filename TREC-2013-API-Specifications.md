@@ -95,12 +95,6 @@ that slot.  See the table below for details.
  <tr>
   <td>in_reply_to_user_id</td><td>status.in_reply_to_user_id</td> <td>no</td> <td>long</td> <td>The unique identifier of the user who posted the status that this document replies to</td>
  </tr>
- <tr>
-  <td>latitude</td><td>status.geo.coordinates[1]</td> <td>no</td> <td>double</td> <td>The latitude describing the location where the status was posted from</td>
- </tr>
- <tr>
-  <td>longitude</td><td>status.geo.coordinates[0]</td> <td>no</td> <td>double</td> <td>The longitude describing the location where the status was posted from</td>
- </tr>
 </table>
 
 ### Example
