@@ -1,20 +1,24 @@
 ## Lucene Analyzer 
 Please note that all details here are open to change. Discussion can be found in the mailing list, and in [issue #23](https://github.com/lintool/twitter-tools/issues/23).
 
-### Tokenization
+#### Tokenization
 The tokenizer creates a new token whenever it encounters whitespace or one of the following characters: 
 
-    _ - ? ! , ; : . ( ) [ ] @ # / \
+     ] [ ! " # $ % & ( ) * + , . / : ; < = > ? @ \ ^ _ ` { | } ~ - … ¬ · 
 
-It should be noted that although the @ and # characters are used as delimiters, they are preserved in cases where they proceed a valid mention or hashtag.
+There are a number of exceptions where characters listed above will not cause a new token to be created:
+* A period (.) will not cause a new token if it is used as part of an acronym.
+* An ampersand (&) will not cause a new token if the character on both sides is uppercase (such as M&S, AT&T or H&M).
+* The characters @, # and _ will not cause a new token if used as part of a mention or hashtag.
+* Valid URLs are not tokenized
 
-### Text Normalization
+#### Text Normalization
 All text is converted to lowercase, with the exception of URLs which are left untouched due to prevalent use of URL shorteners in tweets, many of which use case-sensitive URLs.
 
-### Stemming
+#### Stemming
 The implementation of porter stemming which is provided with Lucene 4.1 is applied to all tokens, except mentions, hashtags, and URLs.
 
-### Stop Word Removal
+#### Stop Word Removal
 No stop word removal is performed.
 
 ### Examples
@@ -50,6 +54,8 @@ Please note that each token is surrounded by vertical bars: |
     :@valid testing(valid)#hashtags. RT:@meniton (the last @mention is #valid and so is this:@valid), however this is@invalid
     |@valid|test|valid|#hashtags|rt|@meniton|the|last|@mention|is|#valid|and|so|is|thi|@valid|howev|thi|is|invalid|
 
+    this][is[lots[(of)words+with-lots=of-strange!characters?$in-fact=it&has&Every&Single:one;of<them>in_here_B&N_test_test?test\test^testing`testing{testing}testing…testing¬testing·testing what?
+    |thi|is|lot|of|word|with|lot|of|strang|charact|in|fact|it|ha|everi|singl|on|of|them|in|here|bn|test|test|test|test|test|test|test|test|test|test|test|what|
 
 
 ## Indexing Details
