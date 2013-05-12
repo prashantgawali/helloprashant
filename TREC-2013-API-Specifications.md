@@ -101,7 +101,14 @@ that slot.  See the table below for details.
  <tr>
   <td>in_reply_to_user_id</td><td>status.in_reply_to_user_id</td> <td>no</td> <td>long</td> <td>The unique identifier of the user who posted the status that this document replies to</td>
  </tr>
+<tr>
+ <td>retweeted_status_id</td><td>status.retweeted_status_id</td> <td>no</td> <td>long</td> <td>The unique identifier of the tweet that this is a retweet of.</td>
+</tr>
+
 </table>
+<tr>
+ <td>retweeted_user_id</td><td>status.retweeted_user_id</td> <td>no</td> <td>long</td> <td>The user ID of person who posted the tweet that this is a retweet of.</td>
+</tr>
 
 ### Example
 Consider the following JSON object:
