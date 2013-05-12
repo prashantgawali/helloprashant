@@ -104,11 +104,11 @@ that slot.  See the table below for details.
 <tr>
  <td>retweeted_status_id</td><td>status.retweeted_status_id</td> <td>no</td> <td>long</td> <td>The unique identifier of the tweet that this is a retweet of.</td>
 </tr>
-
-</table>
 <tr>
  <td>retweeted_user_id</td><td>status.retweeted_user_id</td> <td>no</td> <td>long</td> <td>The user ID of person who posted the tweet that this is a retweet of.</td>
 </tr>
+</table>
+
 
 ### Example
 Consider the following JSON object:
@@ -132,7 +132,7 @@ Consider the following JSON object:
     screen_name: "cheryna27",
     location: "seremban-kl-seremban",
     url: "http://cheryna.blogspot.com",
-    description: "I fart. A lot. Go away if you can't stand the smell.",
+    description: "I. A lot. Go away if you can't stand the smell.",
     protected: false,
     followers_count: 214,
     friends_count: 174,
