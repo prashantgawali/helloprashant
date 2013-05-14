@@ -94,7 +94,9 @@ Statistics obtained from the API (e.g. term frequency, collection probabilities)
 
 ### Assessment & Evaluation
 
-NIST assessors will judge the relevance of tweets to the specified information need on a graded scale of "informativeness". As all topics are expressed in English, non-English tweets will be judged non-relevant, even if the topic's assessor understands the language of the tweet and the tweet would be relevant in that language. Similar to last year, re-tweets will be automatically judged as irrelevant. 
+NIST assessors will judge the relevance of tweets to the specified information need on a graded scale of "informativeness". As all topics are expressed in English, non-English tweets will be judged non-relevant, even if the topic's assessor understands the language of the tweet and the tweet would be relevant in that language. 
+
+Regarding retweets: partial retweets will be judged as relevant if the non-RT part of the text conveys some relevant added value. 
 
 As mentioned above, the effectiveness measures that the organizers will report are to be determined.
 
