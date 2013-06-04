@@ -2,7 +2,7 @@ The TREC 2013 microblog track is experimenting with the "track as a service" mod
 
 ## Search API
 
-### For the Impatient
+### For the Impatient...
 
 Here's a sample invocation of the command-line interface to the search API:
 
@@ -19,9 +19,9 @@ After you've cloned the `twitter-tools` repo and successfully built the project 
 + `[GROUP]`: your group id
 + `[TOKEN]`: your authentication token
 
-NOTE: We're still figuring out the details of how exactly to distribute this information... for now, bug Jimmy Lin.
+**NOTE:** We're still figuring out the details of how exactly to distribute this information... for now, bug Jimmy Lin.
 
-In this example, we are search for topic `MB01` from TREC 2011 (assuming the service provides the Tweets2011` corpus`). The other command line parameters are:
+In this example, we are search for topic `MB01` from TREC 2011 (assuming the service provides the Tweets2011 corpus). The other command line parameters are:
 
 + `port`: use 9090
 + `qid`: the topic id
@@ -30,16 +30,37 @@ In this example, we are search for topic `MB01` from TREC 2011 (assuming the ser
 + `num_results`: number of hits to return
 + `runtag`: runtag to use (from `trec_eval` output format)
 
-This section describes the fields from Twitter’s JSON-represented statuses that the API indexes, stores, and exposes.
+### Search Results Specifications
 
-### Indexed Fields
-All fields are marked as Store.YES in the index, allowing users to access data from retrieved documents.  Some fields 
-are present in all statuses, while others only contain a value if the source JSON object contained a non-null entry in
-that slot.  See the table below for details.
+If you're familiar with Thrift, the search results have the following specifications:
+
+```
+struct TResult {
+  1: i64 id,
+  2: double rsv,
+  3: string screen_name,
+  4: i64 epoch,
+  5: string text,
+  6: i32 followers_count,
+  7: i32 statuses_count,
+  8: string lang,
+  9: i64 in_reply_to_status_id,
+ 10: i64 in_reply_to_user_id,
+ 11: i64 retweeted_status_id,
+ 12: i64 retweeted_user_id,
+ 13: i32 retweeted_count
+}
+```
+
+Here is a description of the fields:
 
 <table>
  <tr>
-  <td>Field Name in API</td><td>Corresponding JSON element</td><td>Always Present</td> <td>Data Type</td> <td>Description</td>
+  <td><b>Field Name in API</b></td>
+  <td><b>Corresponding JSON element</b></td>
+  <td><b>Always Present</b></td>
+  <td><b>Type</b></td>
+  <td><b>Description</b></td>
  </tr>
  <tr>
   <td>id</td><td>status.id</td><td>yes</td> <td>long</td> <td>The unique identifier assigned to this document by Twitter</td>
@@ -52,9 +73,6 @@ that slot.  See the table below for details.
  </tr>
  <tr>
   <td>text</td> <td>status.text</td><td>yes</td> <td>String</td> <td>The text of the status</td>
- </tr>
-  <tr>
-  <td>retweeted_count</td><td>status_retweet_count</td> <td>yes</td> <td>long</td> <td>Number of times this status has been retweeted. Non-retweeted documents show 0</td>
  </tr>
  <tr>
   <td>followers_count</td><td>status.user.followers_count</td> <td>yes</td> <td>int</td> <td>The number of followers that the author of this status has</td>
@@ -77,81 +95,13 @@ that slot.  See the table below for details.
 <tr>
  <td>retweeted_user_id</td><td>status.retweeted_user_id</td> <td>no</td> <td>long</td> <td>The user ID of person who posted the tweet that this is a retweet of.</td>
 </tr>
+  <tr>
+  <td>retweeted_count</td><td>status_retweet_count</td> <td>no</td> <td>int</td> <td>Number of times this status has been retweeted. Non-retweeted documents show 0</td>
+ </tr>
+
 </table>
 
-
-### Example
-Consider the following JSON object:
-
-     {
-    created_at: "Fri Mar 29 11:42:34 +0000 2013",
-    id: 317602681340432400,
-    id_str: "317602681340432384",
-    text: "@hanahani3310 alhamdulillah :)",
-    source: "<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a>",
-    truncated: false,
-    in_reply_to_status_id: 317602575803363300,
-    in_reply_to_status_id_str: "317602575803363329",
-    in_reply_to_user_id: 1054214132,
-    in_reply_to_user_id_str: "1054214132",
-    in_reply_to_screen_name: "hanahani3310",
-    user: {
-    id: 28106647,
-    id_str: "28106647",
-    name: "cheryna",
-    screen_name: "cheryna27",
-    location: "seremban-kl-seremban",
-    url: "http://cheryna.blogspot.com",
-    description: "I. A lot. Go away if you can't stand the smell.",
-    protected: false,
-    followers_count: 214,
-    friends_count: 174,
-    listed_count: 1,
-    created_at: "Wed Apr 01 13:39:16 +0000 2009",
-    favourites_count: 1825,
-    utc_offset: -32400,
-    time_zone: "Alaska",
-    geo_enabled: true,
-    verified: false,
-    ... snip ...
-    geo: {
-    type: "Point",
-    coordinates: [
-    3.14489609,
-    101.69596372
-    ]
-    },
-    ... snip ...
-    contributors: null,
-    retweet_count: 0,
-    favorite_count: 0,
-    favorited: false,
-    retweeted: false,
-    lang: "id"
-    }
-
-If we retrieve this document from the index into a org.apache.lucene.document.Document object called hit and then invoke:
-
-        List<IndexableField> fields = hit.getFields();
-        Iterator<IndexableField> fieldIt = fields.iterator();
-        while(fieldIt.hasNext()) {
-          IndexableField field = fieldIt.next();
-          System.out.println(field.toString());
-        }
-
-we see the following output:
-
-    stored<id:317602681340432384>
-    stored<epoch:1364557354>
-    stored,indexed,tokenized<screen_name:cheryna27>
-    stored,indexed,tokenized<text:@hanahani3310 alhamdulillah :)>
-    stored<retweet_count:0>
-    stored<in_reply_to_status_id:317602575803363329>
-    stored<in_reply_to_user_id:1054214132>
-    stored,indexed,tokenized<lang:id>
-    stored<friends_count:180>
-    stored<followers_count:160>
-    stored<statuses_count:27700>
+Note that for the fields in which "Always present" is "no", the result value will be either 0 or `null` if the field is not present in the original JSON status object.
 
 
 ## Lucene Analyzer 
