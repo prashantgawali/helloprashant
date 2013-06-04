@@ -13,7 +13,7 @@ Here's a sample invocation of the command-line interface to the search API:
     -group [GROUP] -token [TOKEN]
 ```
 
-After you've cloned the `twitter-tools` repo and successfully built the project with `ant`, the above command should work. Note that you need to specify three fields:
+After you've cloned the `twitter-tools` repo and successfully built the project with `ant`, the above command should work. Note that you need three pieces of information to connect to the service:
 
 + `[HOSTNAME]`: the hostname serving the API
 + `[GROUP]`: your group id
@@ -30,9 +30,9 @@ In this example, we are search for topic `MB01` from TREC 2011 (assuming the ser
 + `num_results`: number of hits to return
 + `runtag`: runtag to use (from `trec_eval` output format)
 
-### Search Results Specifications
+### Search Result Specification
 
-If you're familiar with Thrift, the search results have the following specifications:
+The search API returns a list of results. Each result has the following Thrift specification:
 
 ```
 struct TResult {
@@ -103,9 +103,9 @@ Here is a description of the fields:
 
 Note that for the fields in which "Always present" is "no", the result value will be either 0 or `null` if the field is not present in the original JSON status object.
 
+## Lucene Analyzer
 
-## Lucene Analyzer 
-Please note that all details here are open to change. Discussion can be found in the mailing list, and in [issue #23](https://github.com/lintool/twitter-tools/issues/23).
+This section describes the Lucene Analyzer used to process the collection for indexing.
 
 #### Tokenization
 The tokenizer creates a new token whenever it encounters whitespace or one of the following characters: 
