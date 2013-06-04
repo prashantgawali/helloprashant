@@ -1,64 +1,34 @@
-## Lucene Analyzer 
-Please note that all details here are open to change. Discussion can be found in the mailing list, and in [issue #23](https://github.com/lintool/twitter-tools/issues/23).
+The TREC 2013 microblog track is experimenting with the "track as a service" model. Instead of distributing the collection, the evaluation will be conducted by having everyone use a common API to access the collection. This page describes the specification of the API.
 
-#### Tokenization
-The tokenizer creates a new token whenever it encounters whitespace or one of the following characters: 
+## Search API
 
-     ] [ ! " # $ % & ( ) * + , . / : ; < = > ? @ \ ^ _ ` { | } ~ - … ¬ · 
+### For the Impatient
 
-There are a number of exceptions where characters listed above will not cause a new token to be created:
-* A period (.) will not cause a new token if it is used as part of an acronym.
-* An ampersand (&) will not cause a new token if the character on both sides is uppercase (such as M&S, AT&T or H&M).
-* The characters @, # and _ will not cause a new token if used as part of a mention or hashtag.
-* Valid URLs are not tokenized
+Here's a sample invocation of the command-line interface to the search API:
 
-#### Text Normalization
-All text is converted to lowercase, with the exception of URLs which are left untouched due to prevalent use of URL shorteners in tweets, many of which use case-sensitive URLs.
+```
+  etc/run.sh cc.twittertools.search.retrieval.TrecSearchThriftClientCli \
+    -host [HOSTNAME] -port 9090 -qid MB01 -q 'BBC World Service staff cuts' \
+    -max_id 34952194402811905 -num_results 1000 -runtag lucene \
+    -group [GROUP] -token [TOKEN]
+```
 
-#### Stemming
-The implementation of porter stemming which is provided with Lucene 4.1 is applied to all tokens, except mentions, hashtags, and URLs.
+After you've cloned the `twitter-tools` repo and successfully built the project with `ant`, the above command should work. Note that you need to specify three fields:
 
-#### Stop Word Removal
-No stop word removal is performed.
++ `[HOSTNAME]`: the hostname serving the API
++ `[GROUP]`: your group id
++ `[TOKEN]`: your authentication token
 
-### Examples
-Please note that each token is surrounded by vertical bars: |
+NOTE: We're still figuring out the details of how exactly to distribute this information... for now, bug Jimmy Lin.
 
-    AT&T getting secret immunity from wiretapping laws for government surveillance http://vrge.co/ZP3Fx5
-    |att|get|secret|immun|from|wiretap|law|for|govern|surveil|http://vrge.co/ZP3Fx5|
+In this example, we are search for topic `MB01` from TREC 2011 (assuming the service provides the Tweets2011` corpus`). The other command line parameters are:
 
-    want to see the @verge aston martin GT4 racer tear up long beach? http://theracersgroup.kinja.com/watch-an-aston-martin-vantage-gt4-tear-around-long-beac-479726219 …
-    |want|to|see|the|@verge|aston|martin|gt4|racer|tear|up|long|beach|http://theracersgroup.kinja.com/watch-an-aston-martin-vantage-gt4-tear-around-long-beac-479726219|
-
-    Incredibly good news! #Drupal users rally http://bit.ly/Z8ZoFe  to ensure blind accessibility contributor gets to @DrupalCon #Opensource
-    |incred|good|new|#drupal|user|ralli|http://bit.ly/Z8ZoFe|to|ensur|blind|access|contributor|get|to|@drupalcon|#opensource|
-
-    We're entering the quiet hours at #amznhack. #Rindfleischetikettierungsüberwachungsaufgabenübertragungsgesetz
-    |were|enter|the|quiet|hour|at|#amznhack|#rindfleischetikettierungsüberwachungsaufgabenübertragungsgesetz|
-
-    The 2013 Social Event Detection Task (SED) at #mediaeval2013, http://bit.ly/16nITsf  supported by @linkedtv @project_mmixer @socialsensor_ip
-    |the|2013|social|event|detect|task|sed|at|#mediaeval2013|http://bit.ly/16nITsf|support|by|@linkedtv|@project_mmixer|@socialsensor_ip|
-
-    U.S.A. U.K. U.K USA UK #US #UK #U.S.A #U.K ...A.B.C...D..E..F..A.LONG WORD
-    |usa|uk|uk|usa|uk|#us|#uk|#u|sa|#u|k|abc|d|e|f|a|long|word|
-
-    this is @a_valid_mention and this_is_multiple_words
-    |thi|is|@a_valid_mention|and|thi|is|multipl|word|
-
-    PLEASE BE LOWER CASE WHEN YOU COME OUT THE OTHER SIDE - ALSO A @VALID_VALID-INVALID
-    |pleas|be|lower|case|when|you|come|out|the|other|side|also|a|@valid_valid|invalid|
-
-    ＠reply @with #crazy ~＃at
-    |＠reply|@with|#crazy|＃at|
-
-    :@valid testing(valid)#hashtags. RT:@meniton (the last @mention is #valid and so is this:@valid), however this is@invalid
-    |@valid|test|valid|#hashtags|rt|@meniton|the|last|@mention|is|#valid|and|so|is|thi|@valid|howev|thi|is|invalid|
-
-    this][is[lots[(of)words+with-lots=of-strange!characters?$in-fact=it&has&Every&Single:one;of<them>in_here_B&N_test_test?test\test^testing`testing{testing}testing…testing¬testing·testing what?
-    |thi|is|lot|of|word|with|lot|of|strang|charact|in|fact|it|ha|everi|singl|on|of|them|in|here|bn|test|test|test|test|test|test|test|test|test|test|test|what|
-
-
-## Indexing Details
++ `port`: use 9090
++ `qid`: the topic id
++ `q`: the query
++ `max_id`: return docids up to this value
++ `num_results`: number of hits to return
++ `runtag`: runtag to use (from `trec_eval` output format)
 
 This section describes the fields from Twitter’s JSON-represented statuses that the API indexes, stores, and exposes.
 
@@ -182,3 +152,64 @@ we see the following output:
     stored<friends_count:180>
     stored<followers_count:160>
     stored<statuses_count:27700>
+
+
+## Lucene Analyzer 
+Please note that all details here are open to change. Discussion can be found in the mailing list, and in [issue #23](https://github.com/lintool/twitter-tools/issues/23).
+
+#### Tokenization
+The tokenizer creates a new token whenever it encounters whitespace or one of the following characters: 
+
+     ] [ ! " # $ % & ( ) * + , . / : ; < = > ? @ \ ^ _ ` { | } ~ - … ¬ · 
+
+There are a number of exceptions where characters listed above will not cause a new token to be created:
+* A period (.) will not cause a new token if it is used as part of an acronym.
+* An ampersand (&) will not cause a new token if the character on both sides is uppercase (such as M&S, AT&T or H&M).
+* The characters @, # and _ will not cause a new token if used as part of a mention or hashtag.
+* Valid URLs are not tokenized
+
+#### Text Normalization
+All text is converted to lowercase, with the exception of URLs which are left untouched due to prevalent use of URL shorteners in tweets, many of which use case-sensitive URLs.
+
+#### Stemming
+The implementation of porter stemming which is provided with Lucene 4.1 is applied to all tokens, except mentions, hashtags, and URLs.
+
+#### Stop Word Removal
+No stop word removal is performed.
+
+### Examples
+Please note that each token is surrounded by vertical bars: |
+
+    AT&T getting secret immunity from wiretapping laws for government surveillance http://vrge.co/ZP3Fx5
+    |att|get|secret|immun|from|wiretap|law|for|govern|surveil|http://vrge.co/ZP3Fx5|
+
+    want to see the @verge aston martin GT4 racer tear up long beach? http://theracersgroup.kinja.com/watch-an-aston-martin-vantage-gt4-tear-around-long-beac-479726219 …
+    |want|to|see|the|@verge|aston|martin|gt4|racer|tear|up|long|beach|http://theracersgroup.kinja.com/watch-an-aston-martin-vantage-gt4-tear-around-long-beac-479726219|
+
+    Incredibly good news! #Drupal users rally http://bit.ly/Z8ZoFe  to ensure blind accessibility contributor gets to @DrupalCon #Opensource
+    |incred|good|new|#drupal|user|ralli|http://bit.ly/Z8ZoFe|to|ensur|blind|access|contributor|get|to|@drupalcon|#opensource|
+
+    We're entering the quiet hours at #amznhack. #Rindfleischetikettierungsüberwachungsaufgabenübertragungsgesetz
+    |were|enter|the|quiet|hour|at|#amznhack|#rindfleischetikettierungsüberwachungsaufgabenübertragungsgesetz|
+
+    The 2013 Social Event Detection Task (SED) at #mediaeval2013, http://bit.ly/16nITsf  supported by @linkedtv @project_mmixer @socialsensor_ip
+    |the|2013|social|event|detect|task|sed|at|#mediaeval2013|http://bit.ly/16nITsf|support|by|@linkedtv|@project_mmixer|@socialsensor_ip|
+
+    U.S.A. U.K. U.K USA UK #US #UK #U.S.A #U.K ...A.B.C...D..E..F..A.LONG WORD
+    |usa|uk|uk|usa|uk|#us|#uk|#u|sa|#u|k|abc|d|e|f|a|long|word|
+
+    this is @a_valid_mention and this_is_multiple_words
+    |thi|is|@a_valid_mention|and|thi|is|multipl|word|
+
+    PLEASE BE LOWER CASE WHEN YOU COME OUT THE OTHER SIDE - ALSO A @VALID_VALID-INVALID
+    |pleas|be|lower|case|when|you|come|out|the|other|side|also|a|@valid_valid|invalid|
+
+    ＠reply @with #crazy ~＃at
+    |＠reply|@with|#crazy|＃at|
+
+    :@valid testing(valid)#hashtags. RT:@meniton (the last @mention is #valid and so is this:@valid), however this is@invalid
+    |@valid|test|valid|#hashtags|rt|@meniton|the|last|@mention|is|#valid|and|so|is|thi|@valid|howev|thi|is|invalid|
+
+    this][is[lots[(of)words+with-lots=of-strange!characters?$in-fact=it&has&Every&Single:one;of<them>in_here_B&N_test_test?test\test^testing`testing{testing}testing…testing¬testing·testing what?
+    |thi|is|lot|of|word|with|lot|of|strang|charact|in|fact|it|ha|everi|singl|on|of|them|in|here|bn|test|test|test|test|test|test|test|test|test|test|test|what|
+
