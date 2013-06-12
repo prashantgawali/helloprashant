@@ -15,6 +15,8 @@ Here's a sample invocation of the command-line interface to the search API:
     -max_id 34952194402811905 -num_results 1000 -runtag lucene
 ```
 
+Note that the current API serves the Tweets2011 corpus and can be used for experimenting with TREC 2011 and TREC 2012 microblog topics.
+
 After you've cloned the `twitter-tools` repo and successfully built the project with `ant`, the above command should work. Note that you need three pieces of information to connect to the service:
 
 + `[HOSTNAME]`: the hostname serving the API
@@ -33,6 +35,18 @@ In this example, we are search for topic `MB01` from TREC 2011 (assuming the ser
 + `max_id`: return docids up to this value
 + `num_results`: number of hits to return
 + `runtag`: runtag to use (from `trec_eval` output format)
+
+Optionally, if you would like to print out all indexed fields, use the `verbose` option.
+
+There's also a Python client, which is in `src/main/python/`. It works much the same way as the Java client. Sample invocation:
+
+```
+  python TrecSearchThriftClientCli.py \
+    -host [HOSTNAME] -port 9090 -group [GROUP] -token [TOKEN] \
+    -qid MB01 -q 'BBC World Service staff cuts' -max_id 34952194402811905 -num_results 1000 -runtag lucene
+```
+
+The script requires the `python-thrift` package, which can installed using `pip install thrift`.
 
 ### Search Result Specification
 
