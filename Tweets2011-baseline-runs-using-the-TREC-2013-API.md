@@ -1,4 +1,4 @@
-Using the TREC 2013 API, it is easy to perform baseline runs on the Tweets2011 collection with topics from TREC 2011 and TREC 2012. Simply connect to the host that serving the Tweets2011 collection. Everything needed is contained in the `twitter-tools` repo. Sample invocation:
+Using the TREC 2013 API, it is easy to perform baseline runs (the underlying model is query-likelihood with Dirichlet priors for smoothing) on the Tweets2011 collection with topics from TREC 2011 and TREC 2012. Simply connect to the host that serving the Tweets2011 collection. Everything needed is contained in the `twitter-tools` repo. Sample invocation:
 
 ```
 etc/run.sh cc.twittertools.search.api.RunQueriesThrift \
