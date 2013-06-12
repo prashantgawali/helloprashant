@@ -50,7 +50,9 @@ The script requires the `python-thrift` package, which can installed using `pip 
 
 ### Search Result Specification
 
-The search API returns a list of results. Each result has the following Thrift specification:
+The search API returns a list of results. The underlying model is query-likelihood with Dirichlet priors for smoothing.
+
+Each result has the following Thrift specification:
 
 ```
 struct TResult {
