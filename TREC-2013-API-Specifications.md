@@ -1,3 +1,5 @@
+**The current version of the search API is distributed in version 1.3.0 of `twitter-tools`.**
+
 The TREC 2013 microblog track is experimenting with the "track as a service" model. Instead of distributing the collection, the evaluation will be conducted by having everyone use a common API to access the collection. This page describes the specification of the API.
 
 ## Search API
@@ -7,10 +9,10 @@ The TREC 2013 microblog track is experimenting with the "track as a service" mod
 Here's a sample invocation of the command-line interface to the search API:
 
 ```
-  etc/run.sh cc.twittertools.search.retrieval.TrecSearchThriftClientCli \
-    -host [HOSTNAME] -port 9090 -qid MB01 -q 'BBC World Service staff cuts' \
-    -max_id 34952194402811905 -num_results 1000 -runtag lucene \
-    -group [GROUP] -token [TOKEN]
+  etc/run.sh cc.twittertools.search.api.SearchStatusesThrift \
+    -host [HOSTNAME] -port 9090 -group [GROUP] -token [TOKEN] \
+    -qid MB01 -q 'BBC World Service staff cuts' \
+    -max_id 34952194402811905 -num_results 1000 -runtag lucene
 ```
 
 After you've cloned the `twitter-tools` repo and successfully built the project with `ant`, the above command should work. Note that you need three pieces of information to connect to the service:
@@ -19,7 +21,9 @@ After you've cloned the `twitter-tools` repo and successfully built the project 
 + `[GROUP]`: your group id
 + `[TOKEN]`: your authentication token
 
-**NOTE:** We're still figuring out the details of how exactly to distribute this information... for now, bug Jimmy Lin.
+The service hostname is provided [here](http://www.umiacs.umd.edu/~jimmylin/trec2013microblog/servers.txt). The page is password protected, with the same username/password combination as for accessing the "active participants" section of the TREC site.
+
+For the access tokens, please email Lori Buckland at NIST and provide her with your group id. Lori's email address is `lori.buckland [at] nist.gov`.
 
 In this example, we are search for topic `MB01` from TREC 2011 (assuming the service provides the Tweets2011 corpus). The other command line parameters are:
 
@@ -162,4 +166,3 @@ Please note that each token is surrounded by vertical bars: |
 
     this][is[lots[(of)words+with-lots=of-strange!characters?$in-fact=it&has&Every&Single:one;of<them>in_here_B&N_test_test?test\test^testing`testing{testing}testing…testing¬testing·testing what?
     |thi|is|lot|of|word|with|lot|of|strang|charact|in|fact|it|ha|everi|singl|on|of|them|in|here|bn|test|test|test|test|test|test|test|test|test|test|test|what|
-
