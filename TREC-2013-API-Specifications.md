@@ -15,7 +15,7 @@ Here's a sample invocation of the command-line interface to the search API:
     -max_id 34952194402811905 -num_results 1000 -runtag lucene
 ```
 
-Note that the current API serves the Tweets2011 corpus and can be used for experimenting with TREC 2011 and TREC 2012 microblog topics.
+Note that the current API serves the Tweets2011 corpus and can be used for experimenting with TREC 2011 and TREC 2012 microblog topics. See also this page on [Tweets2011 baseline runs using the TREC 2013 API](https://github.com/lintool/twitter-tools/wiki/Tweets2011-baseline-runs-using-the-TREC-2013-API).
 
 After you've cloned the `twitter-tools` repo and successfully built the project with `ant`, the above command should work. Note that you need three pieces of information to connect to the service:
 
