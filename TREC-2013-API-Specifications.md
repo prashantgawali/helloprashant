@@ -1,23 +1,12 @@
-**The current version of the search API is distributed in version 1.3.0 of `twitter-tools`.**
+**The current version of the search API is distributed in version 1.4.1 of `twitter-tools-cre`.**
 
 The TREC 2013 microblog track is experimenting with the "track as a service" model. Instead of distributing the collection, the evaluation will be conducted by having everyone use a common API to access the collection. This page describes the specification of the API.
 
 ## Search API
 
-### For the Impatient...
+### Prerequisites
 
-Here's a sample invocation of the command-line interface to the search API:
-
-```
-  etc/run.sh cc.twittertools.search.api.SearchStatusesThrift \
-    -host [HOSTNAME] -port 9090 -group [GROUP] -token [TOKEN] \
-    -qid MB01 -q 'BBC World Service staff cuts' \
-    -max_id 34952194402811905 -num_results 1000 -runtag lucene
-```
-
-Note that the current API serves the Tweets2011 corpus and can be used for experimenting with TREC 2011 and TREC 2012 microblog topics. See also this page on [Tweets2011 baseline runs using the TREC 2013 API](https://github.com/lintool/twitter-tools/wiki/Tweets2011-baseline-runs-using-the-TREC-2013-API).
-
-After you've cloned the `twitter-tools` repo and successfully built the project with `ant`, the above command should work. Note that you need three pieces of information to connect to the service:
+You need three pieces of information to connect to the service:
 
 + `[HOSTNAME]`: the hostname serving the API
 + `[GROUP]`: your group id
@@ -25,7 +14,29 @@ After you've cloned the `twitter-tools` repo and successfully built the project 
 
 The service hostname is provided [here](http://www.umiacs.umd.edu/~jimmylin/trec2013microblog/servers.txt). The page is password protected, with the same username/password combination as for accessing the "active participants" section of the TREC site.
 
+Note that there are two hostnames available: one serves the Tweets2011 collection, the other serves the Tweet2013 collection. Both serve exactly the same API.
+
 For the access tokens, please email Lori Buckland at NIST and provide her with your group id. Lori's email address is `lori.buckland [at] nist.gov`.
+
+### Using the Simple Client
+
+First make sure you've followed the instructions in the [README](https://github.com/lintool/twitter-tools) to check out and build the artifact. Then:
+
+```
+cd twitter-tools-core
+mvn clean package appassembler:assemble
+```
+
+Now you can use the command-line interface to the search API. Here's a sample invocation:
+
+```
+  sh target/appassembler/bin/SearchStatusesThrift \
+    -host [HOSTNAME] -port 9090 -group [GROUP] -token [TOKEN] \
+    -qid MB01 -q 'BBC World Service staff cuts' \
+    -max_id 34952194402811905 -num_results 1000 -runtag lucene
+```
+
+Note that in the above example we are searching the Tweets2011 collection, so the `[HOSTNAME]` must point to the server that is serving the collection. However, the server hosting the Tweets2013 collection behaves exactly the same way. The server hosting the Tweets2011 collection can be used for experimenting with TREC 2011 and TREC 2012 microblog topics. See also this page on [Tweets2011 baseline runs using the TREC 2013 API](https://github.com/lintool/twitter-tools/wiki/Tweets2011-baseline-runs-using-the-TREC-2013-API).
 
 In this example, we are search for topic `MB01` from TREC 2011 (assuming the service provides the Tweets2011 corpus). The other command line parameters are:
 
