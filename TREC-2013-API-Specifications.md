@@ -63,6 +63,12 @@ There's also a Python client, which is in `src/main/python/`. It works much the 
 
 The script requires the `python-thrift` package, which can installed using `pip install thrift`.
 
+### Retrieval Model
+
+The search API uses Lucene's implementation of query likelihood in `org.apache.lucene.search.similarities.LMDirichletSimilarity`, with `mu` set to 2500.
+
+Note that there is a known issue with Lucene's retrieval status values (i.e., document scores). In a standard implementation of query-likelihood, the scores should be log probs, which are negative scores. The scores returned by Lucene are positive values. This is currently being investigated.
+
 ### Search Result Specification
 
 The search API returns a list of results. The underlying model is query-likelihood with Dirichlet priors for smoothing.
