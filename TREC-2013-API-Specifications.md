@@ -1,4 +1,4 @@
-**The current version of the search API is distributed in version 1.4.1 of `twitter-tools-cre`.**
+**The current version of the search API is distributed in version 1.4.1 of `twitter-tools-core`.**
 
 The TREC 2013 microblog track is experimenting with the "track as a service" model. Instead of distributing the collection, the evaluation will be conducted by having everyone use a common API to access the collection. This page describes the specification of the API.
 
@@ -18,7 +18,9 @@ Note that there are two hostnames available: one serves the Tweets2011 collectio
 
 For the access tokens, please email Lori Buckland at NIST and provide her with your group id. Lori's email address is `lori.buckland [at] nist.gov`.
 
-### Using the Simple Client
+Note that for TREC 2013, the search API is the *only* method for accessing the collection. You are expected to use the API for generating your runs. For convenience, we provide two sample clients, in Java and Python, describe below.
+
+### Using the Simple Java Client
 
 First make sure you've followed the instructions in the [README](https://github.com/lintool/twitter-tools) to check out and build the artifact. Then:
 
@@ -48,6 +50,8 @@ In this example, we are search for topic `MB01` from TREC 2011 (assuming the ser
 + `runtag`: runtag to use (from `trec_eval` output format)
 
 Optionally, if you would like to print out all indexed fields, use the `verbose` option.
+
+### Using the Simple Python Client
 
 There's also a Python client, which is in `src/main/python/`. It works much the same way as the Java client. Sample invocation:
 
