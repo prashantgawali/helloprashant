@@ -101,12 +101,12 @@ Regarding retweets: partial retweets will be judged relevant if the non-RT part 
 As mentioned above, the effectiveness measures that the organizers will report are to be determined.
 
 
-## Tentative Timeline
+## Timeline
 April-May 2013: Alpha testing of API 
 
 June 2013:      Community testing of API
 
-20th June 2013: (approx): Topics released
+July 16: Topics released
 
 August 15 2013: Runs due
 
