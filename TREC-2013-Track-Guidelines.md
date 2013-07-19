@@ -1,8 +1,6 @@
 # 2013 Track Guidelines --DRAFT
 
-## These guidelines are provisional.  Some information here may change.
-
-These are the draft guidelines for the 2013 TREC Microblog track. The authors are Miles Efron, Jimmy Lin, and Ian Soboroff. This is the third year that the microblog track has run. This year's track will consist of a single task: Real-time Adhoc search, where a user's information need will be represented by a query at a specific time. This task is identical in conception to the ad hoc tasks of previous years.  The primary difference of 2013 from the 2011-2012 microblog tracks lies in the data and the way that participants will interact with it.  In the following sections, we describe the data used by the Microblog track, the method by which teams will interact with the data, and the details of the search task.
+These are the guidelines for the 2013 TREC Microblog track. The authors are Miles Efron, Jimmy Lin, and Ian Soboroff. This is the third year that the microblog track has run. This year's track will consist of a single task: Real-time Adhoc search, where a user's information need will be represented by a query at a specific time. This task is identical in conception to the ad hoc tasks of previous years.  The primary difference of 2013 from the 2011-2012 microblog tracks lies in the data and the way that participants will interact with it.  In the following sections, we describe the data used by the Microblog track, the method by which teams will interact with the data, and the details of the search task.
 
 Note that to participate in the track you need to be a registered participant in TREC 2013.  See [http://trec.nist.gov/pubs/call2013.html](http://trec.nist.gov/pubs/call2013.html) for details.  TREC becomes closed to new participants in late May or early June.
 
@@ -35,7 +33,7 @@ The documentation cited above describes the representation of these tweets as ex
 
 ## Real-time Adhoc Task
 
-In the real-time search task, the user issues a query at a time T.  Systems must rank tweets posted up to this time that are relevant to the user's information need.  Due to the nature of microblogs, it is likely that relevance will have a temporal dimension, but this is by no means guaranteed nor is it operationalized.  Thus, the system should answer a query by providing a list of relevant tweets ranked in decreasing order of predicted relevance. Participating groups should return their top 10,000 tweets published prior to and including the query time defined by the topic. Evaluation will then be conducted by standard IR effectiveness measures (to be determined, but along the lines of P@30, R-Precision, etc.).
+In the real-time search task, the user issues a query at a time T.  Systems must rank tweets posted up to this time that are relevant to the user's information need.  Due to the nature of microblogs, it is likely that relevance will have a temporal dimension, but this is by no means guaranteed nor is it operationalized.  Thus, the system should answer a query by providing a list of relevant tweets ranked in decreasing order of predicted relevance. Participating groups should return their top 1000 tweets published prior to and including the query time defined by the topic. Evaluation will then be conducted by standard IR effectiveness measures.  At a minimum we will assess mean average precision and precision@30.
 
 When scoring tweets, systems should favor relevant and highly informative tweets about the query topic. For this year, the "novelty" between tweets will again not be considered.  
 
@@ -68,10 +66,10 @@ Participating groups may submit up to four runs. At least one run should not use
 Differently from last year, submitted runs must follow standard TREC format:  
 ``` 
 MB01 Q0 3857291841983981 1 1.999 myRun  
-MB01 Q0 3857291841983302 2 3.878 myRun  
+MB01 Q0 3857291841983302 2 0.878 myRun  
 MB01 Q0 3857291841983301 3 0.314 myRun  
 ...  
-MB02 Q0 3857291214283390 10000 0.000001 myRun  
+MB02 Q0 3857291214283390 1000 0.000001 myRun  
 ```
 
 The fields are the topic number, an unused column, a tweet id, the rank of the tweet defined by the run, the score of the tweet by your system, and the identifier for the run (the "run tag"). 
