@@ -1,5 +1,3 @@
-# 2013 Track Guidelines
-
 These are the guidelines for the 2013 TREC Microblog track. The authors are Miles Efron, Jimmy Lin, and Ian Soboroff. This is the third year that the microblog track has run. This year's track will consist of a single task: Real-time Adhoc search, where a user's information need will be represented by a query at a specific time. This task is identical in conception to the ad hoc tasks of previous years.  The primary difference of 2013 from the 2011-2012 microblog tracks lies in the data and the way that participants will interact with it.  In the following sections, we describe the data used by the Microblog track, the method by which teams will interact with the data, and the details of the search task.
 
 Note that to participate in the track you need to be a registered participant in TREC 2013.  See [http://trec.nist.gov/pubs/call2013.html](http://trec.nist.gov/pubs/call2013.html) for details.  TREC becomes closed to new participants in late May or early June.
