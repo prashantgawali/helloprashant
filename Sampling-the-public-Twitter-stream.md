@@ -15,7 +15,7 @@ In order to run `GatherStatusStream`, you must save your Twitter API OAuth crede
 
 Once you have created the `twitter4j.properties` file, you can begin sampling from the public stream using the following invocation:
 
-    etc/run.sh cc.twittertools.stream.GatherStatusStream
+    target/appassembler/bin/GatherStatusStream
 
 The tool will download JSON statuses continuously until it is stopped. Statuses will be saved in the current working directory and compressed hourly. It is recommended that you run the crawler from a server that has good network connections. Crawling from EC2 is a good choice.
 
