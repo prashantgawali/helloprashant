@@ -5,11 +5,9 @@ If you want to use this tool to download Tweets2011, or another static tweet col
 Fetching a status block
 -----------------------
 
-**Note:** The AsyncEmbeddedJsonStatusBlockCrawler is currently broken because Twitter changed their HTML page formatting again to remove the embedded JSON.  The AsyncJsonStatusBlockCrawler (in src/attic), which scrapes the data from the HTML page, needs to be revived and updated.
+The HTML crawler is `cc.twittertools.download.AsyncHTMLStatusBlockCrawler`. Here's a sample invocation:
 
-The HTML crawler is `cc.twittertools.download.AsyncEmbeddedJsonStatusBlockCrawler`. Here's a sample invocation:
-
-    etc/run.sh cc.twittertools.download.AsyncEmbeddedJsonStatusBlockCrawler \
+    sh target/appassembler/bin/AsyncHTMLStatusBlockCrawler \
        -data 20110123/20110123-000.dat -output json/20110123-000.json.gz
 
 Use the `-data` option to specify the status block (`.dat` file) to read. Use the `-output` option to specify where to write the output (gzip-compressed JSON file).
@@ -18,13 +16,13 @@ To download the entire corpus, you'll need to fetch all blocks using this crawle
 
 Despite best efforts handling timeouts and retrying, the crawler may not successfully download all statuses in one go. To address this issue, there is a "repair" command-line option that will output a new data file containing only those statuses that went missing the first time around. Here's a sample invocation:
 
-    etc/run.sh cc.twittertools.download.AsyncEmbeddedJsonStatusBlockCrawler \
+    sh target/appassembler/bin/AsyncHTMLStatusBlockCrawler \
        -data 20110123/20110123-000.dat -output json/20110123-000.json.gz \
        -repair repair/20110123-000.dat
 
 And the corresponding repair:
 
-    etc/run.sh cc.twittertools.download.AsyncEmbeddedJsonStatusBlockCrawler \
+    sh target/appassembler/bin/AsyncHTMLStatusBlockCrawler \
        -data repair/20110123-000.dat -output json/20110123-000.repair.json.gz
 
 **Notes:** 
