@@ -33,7 +33,7 @@ For TREC 2013, the collection consists of approximately 240 million tweets (stat
 Note that there is no way to access the official collection except through the search API.
 The documentation cited above describes the representation of these tweets as exposed by the API.
 
-## Real-Time Ad Hoc Search Task
+### Real-Time Ad Hoc Search Task
 
 In the real-time search task, the user issues a query at a time *T*.  Systems must rank tweets posted up to this time that are relevant to the user's information need.  Due to the nature of microblogs, it is likely that relevance will have a temporal dimension, but this is by no means guaranteed nor is it operationalized.  Thus, the system should answer a query by providing a list of relevant tweets ranked in decreasing order of predicted relevance. Participating groups should return their top 1000 tweets published prior to and including the query time defined by the topic. Evaluation will then be conducted by standard IR effectiveness measures.  At a minimum we will assess mean average precision and precision@30.
 
