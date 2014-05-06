@@ -4,7 +4,7 @@ These are the guidelines for the TREC 2013 microblog track, which is the third r
 
 Note that to participate in the track you need to be a registered participant in TREC 2013.  See [http://trec.nist.gov/pubs/call2013.html](http://trec.nist.gov/pubs/call2013.html) for details.  TREC becomes closed to new participants in late May or early June.
 
-## Track-as-a-Service
+### Track-as-a-Service
 
 For TREC 2013 participants will interact with a tweet collection stored remotely via a search API. Use of the API will be limited to registered TREC participants. To use the track API, teams must obtain authentication credentials. Instructions for obtaining credentials will be posted when the community API testing begins (in June).  
 
@@ -26,7 +26,7 @@ The implementation of the API itself is open-source, and participants are encour
 Community members are encouraged to suggest functionality for the API that would be of interest. The best way to submit such suggestions is by creating an "issue" (prefereably a wishlist item) on the GitHub repository [https://github.com/lintool/twitter-tools/issues](https://github.com/lintool/twitter-tools/issues).  Organizers cannot promise that a given request will be integrated into the API, but it is hoped that the community can agree on crucial functionality.
 
 
-## Tweet Collection
+### Tweet Collection
 
 For TREC 2013, the collection consists of approximately 240 million tweets (statuses), collected via the Twitter streaming API over a two-month period: 1 February, 2013 - 31 March, 2013 (inclusive).  
 
