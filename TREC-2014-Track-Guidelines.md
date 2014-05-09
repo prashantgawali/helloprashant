@@ -18,6 +18,7 @@ The implementation of the API itself is open-source, and participants are encour
 
 Community members are encouraged to suggest functionality for the API that would be of interest. The best way to submit such suggestions is by creating an "issue" (prefereably a wishlist item) on the GitHub repository [https://github.com/lintool/twitter-tools/issues](https://github.com/lintool/twitter-tools/issues).  Organizers cannot promise that a given request will be integrated into the API, but it is hoped that the community can agree on crucial functionality.
 
+To gain access to the API, participants must obtain authentication credentials from NIST by sending email to ```microblog-request@nist.gov```.  In your email, be sure to give the name of your team and your institutional affiliation.
 
 ## Tweet Collection
 
