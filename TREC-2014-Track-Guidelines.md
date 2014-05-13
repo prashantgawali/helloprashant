@@ -2,7 +2,7 @@
 
 # DRAFT GUIDELINES -- THESE ARE SUBJECT TO CHANGE
 
-These are the guidelines for the TREC 2014 microblog track, which is the fourth running of the track. This year's track will consist of a single task: tweet timeline generation (TTG).
+These are the guidelines for the TREC 2014 microblog track, which is the fourth running of the track. In addition to temporally-anchored ad hoc retrieval (same as last year), this year's track will consist of an additional new task: tweet timeline generation (TTG).
 
 Note that to participate in the track you need to be a registered participant in TREC 2014.  See [http://trec.nist.gov/pubs/call2013.html](http://trec.nist.gov/pubs/call2014.html) for details.  TREC becomes closed to new participants in late May or early June.
 
