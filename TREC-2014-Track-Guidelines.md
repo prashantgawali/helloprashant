@@ -105,7 +105,7 @@ Examples of clustered results will be made available to participants as training
 ## Timeline
 
 + May-June: Community discussion to finalize TTG logistics
-+ (subject to change) July 14: Topics released
-+ (subject to change) August 18: Runs due
++ July 18: Topics released
++ August 18: Runs due
 + Mid-September 2014: Relevance assessments released
 + November 2014: TREC conference at Gaithersburg MD, USA
