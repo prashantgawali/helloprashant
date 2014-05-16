@@ -1,5 +1,5 @@
-+ [TREC 2013 Track Guidelines](https://github.com/lintool/twitter-tools/wiki/TREC-2013-Track-Guidelines)
 + [TREC 2014 Track Guidelines](https://github.com/lintool/twitter-tools/wiki/TREC-2014-Track-Guidelines)
++ [TREC 2013 Track Guidelines](https://github.com/lintool/twitter-tools/wiki/TREC-2013-Track-Guidelines)
 + [TREC 2013 API Specifications](https://github.com/lintool/twitter-tools/wiki/TREC-2013-API-Specifications)
 + [Baseline runs using the TREC 2013 API](https://github.com/lintool/twitter-tools/wiki/Baseline-runs-using-the-TREC-2013-API)
 + [Sampling the public Twitter stream](https://github.com/lintool/twitter-tools/wiki/Sampling-the-public-Twitter-stream)
