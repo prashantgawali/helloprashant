@@ -6,11 +6,11 @@ These are the guidelines for the TREC 2014 Microblog track, which is the fourth 
 
 Note that to participate in the track you need to be a registered participant in TREC 2014.  See the [call for participation](http://trec.nist.gov/pubs/call2014.html) for details.  TREC becomes closed to new participants in late May.
 
-### The Tweet Collection and the "Evaluation as a Service" Model
+### The "Evaluation as a Service" Model
 
-The TREC 2014 Microblog track will use the "evaluation as a service" model, just as in TREC 2013. A description of the model can be found in the [2013 track overview paper](http://www.umiacs.umd.edu/~jimmylin/publications/Lin_Efron_TREC2013_notebook.pdf). The basic idea is that participants will interact with a tweet collection stored remotely via a search API. Use of the API will be limited to registered TREC participants. To use the track API, teams must obtain authentication credentials.  
+The TREC 2014 Microblog track will use the same collection of tweets as last year (informally, we refer to this as the Tweets2013 collection). It contains 243 million tweets gathered from the (sampled) public Twitter stream from February 1, 2013 to March 31, 2013 (inclusive, UTC time). Just like last year, we will be adopting the "evaluation as a service" model. A description of the model can be found in the [2013 track overview paper](http://www.umiacs.umd.edu/~jimmylin/publications/Lin_Efron_TREC2013_notebook.pdf). The basic idea is that participants will interact with the tweet collection via a search API. Use of the API will be limited to registered TREC participants. To use the track API, teams must obtain authentication credentials.
 
-The motivation for the track-as-a-service design is to increase the size of the collection while adhering to [Twitter's terms of service](https://twitter.com/tos). Past arrangements allowed teams to acquire local copies of a canonical corpus. But the logistics of this approach prohibited scaling the corpus size up dramatically.  The corpus for 2013 is more than an order of magnitude larger than the previously used [tweets2011](http://trec.nist.gov/data/tweets/) collection. 
+** Note that the collection is not available for download. The search API is the only mechanism for accessing the collection and completing the track tasks ** 
 
 Documentation for the API is available [here](https://github.com/lintool/twitter-tools/wiki/TREC-2013-API-Specifications), and this document will not discuss the API's details. But broadly speaking, the goal of the API is to allow all participants to obtain statistics and other information to support a wide variety of search strategies.  
 
@@ -19,13 +19,6 @@ The implementation of the API itself is open-source, and participants are encour
 Community members are encouraged to suggest functionality for the API that would be of interest. The best way to submit such suggestions is by creating an "issue" (prefereably a wishlist item) on the GitHub repository [https://github.com/lintool/twitter-tools/issues](https://github.com/lintool/twitter-tools/issues).  Organizers cannot promise that a given request will be integrated into the API, but it is hoped that the community can agree on crucial functionality.
 
 To gain access to the API, participants must obtain authentication credentials from NIST by sending email to ```microblog-request@nist.gov```.  In your email, be sure to give the name of your team and your institutional affiliation.
-
-## Tweet Collection
-
-For TREC 2014, the track will use the same corpus collected for TREC 2013, with the possibility of supplementing this with additional (later) documents.  The collection consists of approximately 240 million tweets (statuses), collected via the Twitter streaming API over a two-month period: 1 February, 2013 - 31 March, 2013 (inclusive).  
-
-Note that there is no way to access the official collection except through the search API.
-The documentation cited above describes the representation of these tweets as exposed by the API.
 
 ### Real-Time Ad Hoc Search Task
 
