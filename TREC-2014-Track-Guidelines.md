@@ -1,14 +1,14 @@
 **Track coordinators:** Jimmy Lin and Miles Efron
 
-# DRAFT GUIDELINES -- THESE ARE SUBJECT TO CHANGE
+### DRAFT GUIDELINES -- THIS IS A WORK IN PROGRESS!
 
-These are the guidelines for the TREC 2014 microblog track, which is the fourth running of the track. In addition to temporally-anchored ad hoc retrieval (same as last year), this year's track will consist of an additional new task: tweet timeline generation (TTG).
+These are the guidelines for the TREC 2014 Microblog track, which is the fourth running of the track. In addition to temporally-anchored ad hoc retrieval (same as last year), this year's track will consist of an additional new task: tweet timeline generation (TTG).
 
-Note that to participate in the track you need to be a registered participant in TREC 2014.  See [http://trec.nist.gov/pubs/call2013.html](http://trec.nist.gov/pubs/call2014.html) for details.  TREC becomes closed to new participants in late May or early June.
+Note that to participate in the track you need to be a registered participant in TREC 2014.  See the [call for participation](http://trec.nist.gov/pubs/call2014.html) for details.  TREC becomes closed to new participants in late May.
 
-## Track-as-a-Service
+### The Tweet Collection and the "Evaluation as a Service" Model
 
-For TREC 2014 participants will interact with a tweet collection stored remotely via a search API. Use of the API will be limited to registered TREC participants. To use the track API, teams must obtain authentication credentials.  
+The TREC 2014 Microblog track will use the "evaluation as a service" model, just as in TREC 2013. A description of the model can be found in the [2013 track overview paper](http://www.umiacs.umd.edu/~jimmylin/publications/Lin_Efron_TREC2013_notebook.pdf). The basic idea is that participants will interact with a tweet collection stored remotely via a search API. Use of the API will be limited to registered TREC participants. To use the track API, teams must obtain authentication credentials.  
 
 The motivation for the track-as-a-service design is to increase the size of the collection while adhering to [Twitter's terms of service](https://twitter.com/tos). Past arrangements allowed teams to acquire local copies of a canonical corpus. But the logistics of this approach prohibited scaling the corpus size up dramatically.  The corpus for 2013 is more than an order of magnitude larger than the previously used [tweets2011](http://trec.nist.gov/data/tweets/) collection. 
 
@@ -26,6 +26,52 @@ For TREC 2014, the track will use the same corpus collected for TREC 2013, with 
 
 Note that there is no way to access the official collection except through the search API.
 The documentation cited above describes the representation of these tweets as exposed by the API.
+
+### Real-Time Ad Hoc Search Task
+
+In the real-time search task, the user issues a query at a time *T*.  Systems must rank tweets posted up to this time that are relevant to the user's information need.  Due to the nature of microblogs, it is likely that relevance will have a temporal dimension, but this is by no means guaranteed nor is it operationalized.  Thus, the system should answer a query by providing a list of relevant tweets ranked in decreasing order of predicted relevance. Participating groups should return their top 1000 tweets published prior to and including the query time defined by the topic. Evaluation will then be conducted by standard IR effectiveness measures.  At a minimum we will assess mean average precision and precision@30.
+
+When scoring tweets, systems should favor relevant and highly informative tweets about the query topic. For this year, the "novelty" between tweets will again not be considered.  
+
+Topics will be developed to represent an information need at a specific point in time. An example topic could be:  
+
+```
+  <top>  
+  <num> Number: MB01 </num>  
+  <query> Wael Ghonim </query>  
+  <querytime> 25th February 2011 04:00:00 +0000 </querytime>  
+  <querytweettime> 3857291841983981 </querytweettime>  
+  </top> 
+```
+where:
+
++ the num tag contains the topic number.
++ the query tag contains the user's query representation.
++ the querytime contains the timestamp of the query in a human and machine readable ISO standard form.
++ the querytweettime tag contains the timestamp of the query in terms of the chronologically nearest tweet id within the corpus.
+ 
+NIST will create new topics for the purposes of this task. No narrative and description tags are provided.  But the topic developer/assessor will record a clearly defined information need  when the topic is created. 
+
+For each topic, systems should score each possibly relevant tweet with ID's less than or equal to the query's querytweettime element. Note that while tweet ids are not strictly chronologically ordered, we consider querytweettime to be definitive in preference to querytime.
+
+
+### Submission Guidelines
+
+Participating groups may submit up to four runs. At least one run should not use any external or future source of evidence (see below for a description of external and future sources of evidence). While because of the nature of real-time search, the use of future evidence is discouraged, the use of timely external resources is encouraged. 
+
+Differently from last year, submitted runs must follow standard TREC format:  
+``` 
+MB01 Q0 3857291841983981 1 1.999 myRun  
+MB01 Q0 3857291841983302 2 0.878 myRun  
+MB01 Q0 3857291841983301 3 0.314 myRun  
+...  
+MB02 Q0 3857291214283390 1000 0.000001 myRun  
+```
+
+The fields are the topic number, an unused column, a tweet id, the rank of the tweet defined by the run, the score of the tweet by your system, and the identifier for the run (the "run tag"). 
+
+For each query, tweets not scored/returned will be assumed to have a minimal score (e.g. negative infinity). 
+
 
 ## Tweet Timeline Generation Task
 
