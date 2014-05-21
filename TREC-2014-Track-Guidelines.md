@@ -4,6 +4,14 @@
 
 These are the guidelines for the TREC 2014 Microblog track, which is the fourth running of the track. In addition to temporally-anchored ad hoc retrieval (same as last year), this year's track will consist of an additional new task: tweet timeline generation (TTG).
 
+The timeline for the evaluation is as follows:
+
++ May-June: Community discussion to finalize TTG logistics
++ July 18: Topics released
++ August 18: Runs due
++ Mid-September 2014: Relevance assessments released
++ November 2014: TREC conference at Gaithersburg MD, USA
+
 ### 1. How to Participate
 
 In order to participate in the TREC 2014 Microblog track, you need to register to participate in TREC. See the [call for participation](http://trec.nist.gov/pubs/call2014.html). The call will close in late May.
@@ -108,24 +116,6 @@ For each topic, systems should create a set *R* of tweets with querytweettime el
 
 Collectively, the tweets in the result set should summarize the target event *E* as it has unfolded up to the querytweettime, while including as little redundancy as possible.
 
-
-
-### Submission Guidelines
-
-Participating groups may submit up to four runs. Submitted runs must follow standard TREC format:  
-``` 
-MB01 Q0 3857291841983981 1 1.999 myRun  
-MB01 Q0 3857291841983302 2 0.878 myRun  
-MB01 Q0 3857291841983301 3 0.314 myRun  
-...  
-MB02 Q0 3857291214283390 1000 0.000001 myRun  
-```
-
-The fields are the topic number, an unused column, a tweet id, the rank of the tweet defined by the run, the score of the tweet by your system, and the identifier for the run (the "run tag"). 
-
-For each query, tweets not scored/returned will be assumed to have a minimal score (e.g. negative infinity). 
-
-
 ### 5. External and Future Evidence
 
 The use of external or future evidence should be acknowledged for every submitted run. In particular, we define external and future evidence as follows:
@@ -147,12 +137,3 @@ In the second phase, the assessor will go through the relevant tweets chronologi
 Given these clusters of tweets, the participants’ runs are then scored. There are many options for an evaluation metric, and here we propose a starting point: If there are r tweet clusters for a particular topic, at rank r in the participants’ results list, how many clusters are covered? A run gets credit for retrieving only one tweet for each cluster.  We can plot a tradeoff curve by then sweeping the rank cutoff position, e.g., 2r, 3r, etc. Of course, this is only one of many possible evaluation metrics, and we will solicit both community feedback and explore alternatives.
 
 Examples of clustered results will be made available to participants as training data during June 2014.
-
-
-### 7. Timeline
-
-+ May-June: Community discussion to finalize TTG logistics
-+ July 18: Topics released
-+ August 18: Runs due
-+ Mid-September 2014: Relevance assessments released
-+ November 2014: TREC conference at Gaithersburg MD, USA
