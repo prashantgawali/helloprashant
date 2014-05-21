@@ -57,12 +57,10 @@ NIST will create new topics for the purposes of this task. No narrative and desc
 
 For each topic, systems should score each possibly relevant tweet with ID's less than or equal to the query's querytweettime element. Note that while tweet ids are not strictly chronologically ordered, we consider querytweettime to be definitive in preference to querytime.
 
-
-### Submission Guidelines
-
 Participating groups may submit up to four runs. At least one run should not use any external or future source of evidence (see below for a description of external and future sources of evidence). While because of the nature of real-time search, the use of future evidence is discouraged, the use of timely external resources is encouraged. 
 
-Differently from last year, submitted runs must follow standard TREC format:  
+Submitted runs must follow standard TREC format:
+
 ``` 
 MB01 Q0 3857291841983981 1 1.999 myRun  
 MB01 Q0 3857291841983302 2 0.878 myRun  
@@ -76,7 +74,7 @@ The fields are the topic number, an unused column, a tweet id, the rank of the t
 For each query, tweets not scored/returned will be assumed to have a minimal score (e.g. negative infinity). 
 
 
-## Tweet Timeline Generation Task
+### 4. Tweet Timeline Generation Task
 
 Given an information need about an event *E*, TTG involves finding on-topic tweets and organizing them into a coherent, non-redundant, chronologically ordered list.  TTG supplements the standard challenges of ad hoc retrieval with issues from topic detection and tracking (TDT) and automatic Q&A.  That is, effective systems will address novelty and redundancy in their results, while also identifying which tweets hold key information about an unfolding topic. 
 
@@ -128,7 +126,7 @@ The fields are the topic number, an unused column, a tweet id, the rank of the t
 For each query, tweets not scored/returned will be assumed to have a minimal score (e.g. negative infinity). 
 
 
-### External and Future Evidence
+### 5. External and Future Evidence
 
 The use of external or future evidence should be acknowledged for every submitted run. In particular, we define external and future evidence as follows:
 
@@ -140,7 +138,7 @@ For example, if you make use of a Wikipedia snapshot from June 2013 (i.e., after
 
 Note that for operational simplicity, *general* statistics obtained from the search API (e.g., term frequency, collection probabilities) will not be considered future evidence, unless you are *specifically* computing statistics over tweets that are after the query time.
 
-### Assessment & Evaluation
+### 6. Assessment & Evaluation
 
 NIST assessors' work will have two phases.  First, for a topic *t*, an assessor will evaluate pooled tweets with respect to relevance, using criteria from previous years.  As all topics are expressed in English, non-English tweets will be judged non-relevant, even if the topic's assessor understands the language of the tweet and the tweet would be relevant in that language. Additionally, retweets are considered non-relevant.
 
@@ -151,7 +149,7 @@ Given these clusters of tweets, the participants’ runs are then scored. There 
 Examples of clustered results will be made available to participants as training data during June 2014.
 
 
-## Timeline
+### 7. Timeline
 
 + May-June: Community discussion to finalize TTG logistics
 + July 18: Topics released
