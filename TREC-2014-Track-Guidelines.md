@@ -4,7 +4,7 @@
 
 These are the guidelines for the TREC 2014 Microblog track, which is the fourth running of the track. In addition to temporally-anchored ad hoc retrieval (same as last year), this year's track will consist of an additional new task: tweet timeline generation (TTG).
 
-### How to Participate
+### 1. How to Participate
 
 In order to participate in the TREC 2014 Microblog track, you need to register to participate in TREC. See the [call for participation](http://trec.nist.gov/pubs/call2014.html). The call will close in late May.
 
@@ -19,7 +19,7 @@ The Microblog track in 2014 will use the "evaluation as a service" (EaaS) model 
 
 Note that the file is password protected with the same username/password combination as the TREC 2014 Active Participants site: you should have received the username/password when you signed up for TREC 2014. Please do not publicize this information. 
 
-### The "Evaluation as a Service" Model
+### 2. The "Evaluation as a Service" Model
 
 The TREC 2014 Microblog track will use the same collection of tweets as last year (informally, we refer to this as the Tweets2013 collection). It contains 243 million tweets gathered from the (sampled) public Twitter stream from February 1, 2013 to March 31, 2013 (inclusive, UTC time). Just like last year, we will be adopting the "evaluation as a service" model. A description of the model can be found in the [2013 track overview paper](http://www.umiacs.umd.edu/~jimmylin/publications/Lin_Efron_TREC2013_notebook.pdf). The basic idea is that participants will interact with the tweet collection via a search API. Use of the API will be limited to registered TREC participants. To use the track API, teams must obtain authentication credentials.
 
@@ -31,29 +31,28 @@ The implementation of the API itself is open-source, and participants are encour
 
 Community members are encouraged to suggest functionality for the API that would be of interest. The best way to submit such suggestions is by creating an "issue" (prefereably a wishlist item) on the GitHub repository [https://github.com/lintool/twitter-tools/issues](https://github.com/lintool/twitter-tools/issues).  Organizers cannot promise that a given request will be integrated into the API, but it is hoped that the community can agree on crucial functionality.
 
-### Real-Time Ad Hoc Search Task
+### 3. Temporally-Anchored Ad Hoc Search Task
 
-In the real-time search task, the user issues a query at a time *T*.  Systems must rank tweets posted up to this time that are relevant to the user's information need.  Due to the nature of microblogs, it is likely that relevance will have a temporal dimension, but this is by no means guaranteed nor is it operationalized.  Thus, the system should answer a query by providing a list of relevant tweets ranked in decreasing order of predicted relevance. Participating groups should return their top 1000 tweets published prior to and including the query time defined by the topic. Evaluation will then be conducted by standard IR effectiveness measures.  At a minimum we will assess mean average precision and precision@30.
+The ad hoc search task is the same as in 2013. Each topic consists of a query *Q* and a time *t*. The system's task is to return a list relevant tweets up until time *t*. Novelty and redundancy are not considered for this task.
 
-When scoring tweets, systems should favor relevant and highly informative tweets about the query topic. For this year, the "novelty" between tweets will again not be considered.  
+Each run should consist of up to 1000 results, where each result must refer to a tweet that is published prior to and including the query time defined by the topic. Evaluation will then be conducted by standard IR effectiveness measures.  **NEED TO DECIDE ON "OFFICIAL" METRIC:** At a minimum we will assess mean average precision and precision@30.
 
-Topics will be developed to represent an information need at a specific point in time. An example topic could be:  
+The topics will be in the same format as last year:
 
 ```
-  <top>  
-  <num> Number: MB01 </num>  
-  <query> Wael Ghonim </query>  
-  <querytime> 25th February 2011 04:00:00 +0000 </querytime>  
-  <querytweettime> 3857291841983981 </querytweettime>  
-  </top> 
+<top>
+<num> Number: MB111 </num>
+<query> water shortages </query>
+<querytime> Fri Mar 29 18:56:02 +0000 2013 </querytime>
+<querytweettime> 317711766815653888 </querytweettime>
+</top>
 ```
 where:
++ the `num` tag contains the topic number.
++ the `query` tag contains the user's query representation.
++ the `querytime` contains the timestamp of the query in a human and machine readable ISO standard form.
++ the `querytweettime` tag contains the timestamp of the query in terms of the chronologically nearest tweet id within the corpus.
 
-+ the num tag contains the topic number.
-+ the query tag contains the user's query representation.
-+ the querytime contains the timestamp of the query in a human and machine readable ISO standard form.
-+ the querytweettime tag contains the timestamp of the query in terms of the chronologically nearest tweet id within the corpus.
- 
 NIST will create new topics for the purposes of this task. No narrative and description tags are provided.  But the topic developer/assessor will record a clearly defined information need  when the topic is created. 
 
 For each topic, systems should score each possibly relevant tweet with ID's less than or equal to the query's querytweettime element. Note that while tweet ids are not strictly chronologically ordered, we consider querytweettime to be definitive in preference to querytime.
