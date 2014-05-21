@@ -4,14 +4,20 @@
 
 These are the guidelines for the TREC 2014 Microblog track, which is the fourth running of the track. In addition to temporally-anchored ad hoc retrieval (same as last year), this year's track will consist of an additional new task: tweet timeline generation (TTG).
 
-Note that to participate in the track you need to be a registered participant in TREC 2014.  See the [call for participation](http://trec.nist.gov/pubs/call2014.html) for details.  TREC becomes closed to new participants in late May.
-
-
 ### How to Participate
-Before you can participate in the 2014 microblog track, you must have three items in place:
- + You must officially register as a TREC 2014 participant. You can do this at https://ir.nist.gov/trecsubmit.open/application.html .  
- + You must sign and submit the TREC Agreement Concerning Dissemination of TREC Results.  Download this form at http://trec.nist.gov/act_part/forms/noads.pdf .  Email a copy of your signed form to ```trec@nist.gov```.
- + You must complete and submit the TREC Microblog APIs (v1.0) usage agreement, available at: https://github.com/lintool/twitter-tools/blob/master/API-agreement.pdf
+
+In order to participate in the TREC 2014 Microblog track, you need to register to participate in TREC. See the [call for participation](http://trec.nist.gov/pubs/call2014.html). The call will close in late May.
+
+The Microblog track in 2014 will use the "evaluation as a service" (EaaS) model (more below), where teams interact with the official corpus via a common API. Thus, you need to request access to the API via the following steps:
+
+**NOTE**: If you participated in TREC 2013 and already have access to the API, you do not need to do anything.
+
+1. Fill out the [API usage agreement](http://lintool.github.io/twitter-tools/API-agreement.pdf).
+2. Email the usage agreement to `microblog-request@nist.gov`.
+3. After NIST receives your request, you will receive an access token from NIST.
+4. The code for accessing the API can be found in this repository. The endpoint of API itself (i.e., hostname, port) can be found at [this location](http://www.umiacs.umd.edu/~jimmylin/trec2014microblog/servers.txt).
+
+Note that the file is password protected with the same username/password combination as the TREC 2014 Active Participants site: you should have received the username/password when you signed up for TREC 2014. Please do not publicize this information. 
 
 ### The "Evaluation as a Service" Model
 
@@ -24,8 +30,6 @@ Documentation for the API is available [here](https://github.com/lintool/twitter
 The implementation of the API itself is open-source, and participants are encouraged to help in its ongoing development via the [twitter-tools](https://groups.google.com/forum/?fromgroups#!forum/trec-twitter-tools) mailing list and the associated [GitHub repository](https://github.com/lintool/twitter-tools). 
 
 Community members are encouraged to suggest functionality for the API that would be of interest. The best way to submit such suggestions is by creating an "issue" (prefereably a wishlist item) on the GitHub repository [https://github.com/lintool/twitter-tools/issues](https://github.com/lintool/twitter-tools/issues).  Organizers cannot promise that a given request will be integrated into the API, but it is hoped that the community can agree on crucial functionality.
-
-To gain access to the API, participants must obtain authentication credentials from NIST by sending email to ```microblog-request@nist.gov```.  In your email, be sure to give the name of your team and your institutional affiliation.
 
 ### Real-Time Ad Hoc Search Task
 
