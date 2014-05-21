@@ -6,6 +6,13 @@ These are the guidelines for the TREC 2014 Microblog track, which is the fourth 
 
 Note that to participate in the track you need to be a registered participant in TREC 2014.  See the [call for participation](http://trec.nist.gov/pubs/call2014.html) for details.  TREC becomes closed to new participants in late May.
 
+
+### How to Participate
+Before you can participate in the 2014 microblog track, you must have three items in place:
+ + You must officially register as a TREC 2014 participant. You can do this at https://ir.nist.gov/trecsubmit.open/application.html .  
+ + You must sign and submit the TREC Agreement Concerning Dissemination of TREC Results.  Download this form at http://trec.nist.gov/act_part/forms/noads.pdf .  Email a copy of your signed form to ```trec@nist.gov```.
+ + You must complete and submit the TREC Microblog APIs (v1.0) usage agreement, available at: https://github.com/lintool/twitter-tools/blob/master/API-agreement.pdf
+
 ### The "Evaluation as a Service" Model
 
 The TREC 2014 Microblog track will use the same collection of tweets as last year (informally, we refer to this as the Tweets2013 collection). It contains 243 million tweets gathered from the (sampled) public Twitter stream from February 1, 2013 to March 31, 2013 (inclusive, UTC time). Just like last year, we will be adopting the "evaluation as a service" model. A description of the model can be found in the [2013 track overview paper](http://www.umiacs.umd.edu/~jimmylin/publications/Lin_Efron_TREC2013_notebook.pdf). The basic idea is that participants will interact with the tweet collection via a search API. Use of the API will be limited to registered TREC participants. To use the track API, teams must obtain authentication credentials.
