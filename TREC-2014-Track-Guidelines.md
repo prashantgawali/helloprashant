@@ -122,12 +122,12 @@ The *tentative* metric for scoring summaries will be the F1 metric that combines
 
 The F1 metric combines precision and recall [in the usual way](http://en.wikipedia.org/wiki/F1_score).
 
-The TTG output of a system should use the same format as the ad hoc task (i.e., standard `trec_eval` format), although note that the rank and score fields are essentially ignored.
+The TTG output of a system should use the same format as the ad hoc task (i.e., standard TREC format), although note that the rank and score fields are essentially ignored.
 
 Unresolved issues, open for discussion:
 
-+ How do we account for the fact that some semantic clusters are more important than others? One solution might be to weight the clusters (i.e., compute weighted precision and weighted recall). We could weight the clusters by relevance grade, i.e., "relevant" tweets get a weight of one and "highly-relevant" tweets get a weight of two. Thus, clusters with many highly-relevant tweets will get a higher overall weight than a singleton tweet.
-+ It might be desirable from the user perspective to see the earliest tweet in each cluster (i.e., the cluster representative). Currently, any tweet from the same semantic cluster is considered equivalent and receives the same credit. That is, retrieving the last tweet will yield the same score as retrieving the first tweet. We would institute some type of temporal penalty, or as an alternative, we could simply punt on the problem for this year.
++ How do we account for the fact that some semantic clusters are more important than others? One solution might be to weight the clusters (i.e., compute weighted precision and weighted recall). We could weight the clusters by relevance grade, i.e., "relevant" tweets get a weight of one and "highly-relevant" tweets get a weight of two. Thus, clusters with many highly-relevant tweets will get a higher weights.
++ It might be desirable from the user perspective to see the earliest tweet in each cluster (i.e., the cluster representative). Currently, any tweet from the same semantic cluster is considered equivalent and receives the same credit. That is, retrieving the last tweet will yield the same score as retrieving the first tweet. We could institute some type of temporal penalty, or as an alternative, we could simply punt on the problem for this year.
 
 ### 5. External and Future Evidence
 
