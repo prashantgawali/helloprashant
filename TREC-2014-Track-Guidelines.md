@@ -98,9 +98,21 @@ For example, consider the topic "Haiti Aristide return", the following tweets mi
 32469924240695297	Haiti allows ex-president Aristide's return http://t.co/pSBXmfq from @ajenglish (Can Haitian politics get any more interesting?)
 ```
 
+As well as the following:
 
+```
+32250441588805633	Haiti to give Aristide passport: Officials in Haiti say they are ready to issue ex-president Jean-Bertrand Arist... http://bbc.in/eJlaNq
+32252735009062912	The global drama keeps on coming! Past month is like drugs for IR majors RT @BBCWorld Haiti to give Aristide passport http://bbc.in/gS8USt
+32273316047757312	Haiti to give Aristide passport - http://www.bbc.co.uk/news/world-latin-america-12330414
+32279145685721088	Aristide eligible for Haitian passport http://bit.ly/fgZkSh
+32443364628500480	#MIAMI Haiti to issue ex-president Aristide with passport, clearing way for him to return http://bit.ly/fAV5fB
+32547700427718657	BBC News - Haiti to issue ex-president Aristide with passport http://www.bbc.co.uk/news/world-latin-america-12330414
+```
 
-*substantively* 
+We consider each of the group of tweets above to form a *semantic cluster*, representing an equivalence class of tweets that contain the same information. Each cluster can be represented be a *cluster representative*, which we take to be the first (chronologically earliest) tweet in each semantic cluster.
+
+Note that much like the notion of relevance, what constitutes *substantive* differences is in the eye of the assessor. For simplicity, this judgment is taken only on the level of tweets, *not* any smaller unit.
+
 **What follows below is just rough fodder --- DO NOT PAY ATTENTION (yet)**
 
 The goal of TTG is to provide the user with a concise list of tweets (i.e., a timeline summary) that addresses his or her information need. If the topic concerned an event (for example, the 2013 Butler County, PA train crash), these tweets might highlight breaking developments: the initial report of the accident, updates on fatalities, progress on determination of cause, etc.
