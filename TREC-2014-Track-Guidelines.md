@@ -87,7 +87,7 @@ Tweet Timeline Generation (TTG) is a new task for this year's Microblog track wi
 
 TTG supplements the standard challenges of ad hoc retrieval with issues from topic detection and tracking (TDT) and multi-document summarization. For this year (beyond ad hoc retrieval), systems will need to address two challenges:
 
-+ Detect (and eliminate) redundant tweets, which is equivalent to saying that systems must detect novelty. Systems will not be given "credit" for returning tweets that contain redundant information.
++ Detect (and eliminate) redundant tweets, which is equivalent to saying that systems must detect novelty. Systems will not be penalized for returning tweets that contain redundant information.
 + Determine how many results to return:\ that is, systems will be penalized for results that are too verbose.
 
 Redundancy is operationalized as follows: for each pair of tweets, if the chronologically later tweet contains *substantive* information that is not present in the earlier tweet, the latter tweet is said to be *novel*; otherwise the two tweets are assumed to be *redundant*.  It is assumed that redundancy is transitive, i.e., if *A* and *B* are redundant and *B* and *C* are redundant, then *A* and *C* are assumed to be redundant.
@@ -115,39 +115,14 @@ We consider each of the group of tweets above a *semantic cluster*, representing
 
 Human assessors will create semantic clusters from the list of tweets judged to be "relevant" or "highly relevant" from the ad hoc task. These clusters will then be used to score system results. Examples for TREC topics from 2011 and 2012 that have been grouped into semantic clusters can be found [here](http://ylwang99.github.io/TweetTimelineGeneration/semantic-clusters.html).
 
+The *tentative* metric for scoring summaries will be the F1 metric that combines the following:
 
++ Cluster precision. Of the tweets returned by the system, how many *distinct* semantic clusters are represented. Note that the system does not get "credit" for retrieving multiple tweets from the same semantic clusters (in fact, redundant tweets lower precision).
++ Cluster recall. Of the semantic clusters discovered by the assessor, how many are represented in the system's output. As with the precision calculation, the system does not get "credit" for retrieving multiple tweets from the same semantic cluster.
 
-**What follows below is just rough fodder --- DO NOT PAY ATTENTION (yet)**
+The F1 metric combines precision and recall [in the usual way](http://en.wikipedia.org/wiki/F1_score).
 
-The goal of TTG is to provide the user with a concise list of tweets (i.e., a timeline summary) that addresses his or her information need. If the topic concerned an event (for example, the 2013 Butler County, PA train crash), these tweets might highlight breaking developments: the initial report of the accident, updates on fatalities, progress on determination of cause, etc.
-
-
-For 2014, NIST will develop new topics for the microblog track.  As in the past, each topic will represent an information need issued at a specific point in time. An example topic could be:  
-
-```
-  <top>  
-  <num> Number: MB01 </num>  
-  <query> Wael Ghonim </query>  
-  <querytime> 25th February 2011 04:00:00 +0000 </querytime>  
-  <querytweettime> 3857291841983981 </querytweettime>  
-  </top> 
-```
-where:
-
-+ the num tag contains the topic number.
-+ the query tag contains the user's query representation.
-+ the querytime contains the timestamp of the query in a human and machine readable ISO standard form.
-+ the querytweettime tag contains the timestamp of the query in terms of the chronologically nearest tweet id within the corpus.
- 
-No narrative and description tags are provided.  But the topic developer/assessor will record a clearly defined information need  when the topic is created. 
-
-For each topic, systems should create a set *R* of tweets with querytweettime elements less than or equal to the topics' querytweettime.  It is up to participants to decide how to populate *R*.  But in general, *R* should consist of tweets that
-
-+ are topically relevant to the query
-+ convey key (as opposed to tangential) information about the event referenced by the query
-+ are non-redundant with respect to other tweets in the set.
-
-Collectively, the tweets in the result set should summarize the target event *E* as it has unfolded up to the querytweettime, while including as little redundancy as possible.
+The TTG output of a system should use the same format as the ad hoc task (i.e., standard `trec_eval` format), although note that the rank and score fields are essentially ignored.
 
 ### 5. External and Future Evidence
 
@@ -160,13 +135,3 @@ The use of external or future evidence should be acknowledged for every submitte
 For example, if you make use of a Wikipedia snapshot from June 2013 (i.e., after the corpus was collected), then this is both an external and future evidence. But a Wikipedia snapshot from January 2013 is considered external but not future evidence.
 
 Note that for operational simplicity, *general* statistics obtained from the search API (e.g., term frequency, collection probabilities) will not be considered future evidence, unless you are *specifically* computing statistics over tweets that are after the query time.
-
-### 6. Assessment & Evaluation
-
-NIST assessors' work will have two phases.  First, for a topic *t*, an assessor will evaluate pooled tweets with respect to relevance, using criteria from previous years.  As all topics are expressed in English, non-English tweets will be judged non-relevant, even if the topic's assessor understands the language of the tweet and the tweet would be relevant in that language. Additionally, retweets are considered non-relevant.
-
-In the second phase, the assessor will go through the relevant tweets chronologically from oldest to newest and create clusters of tweets that contain substantially the same information (where substantially is defined by whatever the assessor deems relevant).   
-
-Given these clusters of tweets, the participants’ runs are then scored. There are many options for an evaluation metric, and here we propose a starting point: If there are r tweet clusters for a particular topic, at rank r in the participants’ results list, how many clusters are covered? A run gets credit for retrieving only one tweet for each cluster.  We can plot a tradeoff curve by then sweeping the rank cutoff position, e.g., 2r, 3r, etc. Of course, this is only one of many possible evaluation metrics, and we will solicit both community feedback and explore alternatives.
-
-Examples of clustered results will be made available to participants as training data during June 2014.
