@@ -81,8 +81,15 @@ The fields are the topic number, an unused column, a tweet id, the rank of the t
 
 ### 4. Tweet Timeline Generation Task
 
-Given an information need about an event *E*, TTG involves finding on-topic tweets and organizing them into a coherent, non-redundant, chronologically ordered list.  TTG supplements the standard challenges of ad hoc retrieval with issues from topic detection and tracking (TDT) and automatic Q&A.  That is, effective systems will address novelty and redundancy in their results, while also identifying which tweets hold key information about an unfolding topic. 
+The Tweet Timeline Generation (TTG) task is a new task with a putative user model as follows: "I have an information need expressed by a query *Q* at time *t* and I would like a summary that captures relevant information that addresses my need." In this year's task, the summary is operationalized by a list of non-redundant, chronologically ordered tweets that occur before time *t*.
 
+TTG supplements the standard challenges of ad hoc retrieval with issues from topic detection and tracking (TDT) and multi-document summarization. In this years task (beyond ad hoc retrieval), systems will need to address two challenges:
+
++ Detect (and eliminate) redundant tweets. Systems will be penalized for returning redundant tweets. This is equivalent to saying that systems must detect novelty.
++ Determine how many results to return:\ that is, systems will be penalized for returning too many results.
+
+
+** What follows below is just rough fodder --- DO NOT PAY ATTENTION (yet) **
 The goal of TTG is to provide the user with a concise list of tweets (i.e., a timeline summary) that addresses his or her information need. If the topic concerned an event (for example, the 2013 Butler County, PA train crash), these tweets might highlight breaking developments: the initial report of the accident, updates on fatalities, progress on determination of cause, etc.
 
 
