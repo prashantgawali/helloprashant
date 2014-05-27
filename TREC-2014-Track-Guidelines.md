@@ -88,8 +88,20 @@ TTG supplements the standard challenges of ad hoc retrieval with issues from top
 + Detect (and eliminate) redundant tweets. Systems will be penalized for returning redundant tweets. This is equivalent to saying that systems must detect novelty.
 + Determine how many results to return:\ that is, systems will be penalized for returning too many results.
 
+Redundancy is operationalized as follows: for each pair of tweets, if the chronologically later tweet contains *substantive* information that is not present in the earlier tweet, the latter tweet is said to be *novel*; otherwise the two tweets are assumed to be *redundant*.  It is assumed that redundancy is transitive, i.e., if *A* and *B* are redundant and *B* and *C* are redundant, then *A* and *C* are assumed to be redundant.
 
-** What follows below is just rough fodder --- DO NOT PAY ATTENTION (yet) **
+For example, consider the topic "Haiti Aristide return", the following tweets might be considered redundant:
+
+32204788955357184	Haiti opens door for return of ex-president Aristide http://tf.to/fJDt
+32211683082502144	#int'l #news: Haiti opens door for return of ex-president Aristide: PORT-AU-PRINCE (Reuters) - Haiti'... http://bit.ly/gSIFwd #singapore
+32469924240695297	Haiti allows ex-president Aristide's return http://t.co/pSBXmfq from @ajenglish (Can Haitian politics get any more interesting?)
+
+
+
+
+*substantively* 
+**What follows below is just rough fodder --- DO NOT PAY ATTENTION (yet)**
+
 The goal of TTG is to provide the user with a concise list of tweets (i.e., a timeline summary) that addresses his or her information need. If the topic concerned an event (for example, the 2013 Butler County, PA train crash), these tweets might highlight breaking developments: the initial report of the accident, updates on fatalities, progress on determination of cause, etc.
 
 
