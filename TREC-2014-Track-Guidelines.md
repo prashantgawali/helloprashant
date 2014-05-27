@@ -92,10 +92,11 @@ Redundancy is operationalized as follows: for each pair of tweets, if the chrono
 
 For example, consider the topic "Haiti Aristide return", the following tweets might be considered redundant:
 
+```
 32204788955357184	Haiti opens door for return of ex-president Aristide http://tf.to/fJDt
 32211683082502144	#int'l #news: Haiti opens door for return of ex-president Aristide: PORT-AU-PRINCE (Reuters) - Haiti'... http://bit.ly/gSIFwd #singapore
 32469924240695297	Haiti allows ex-president Aristide's return http://t.co/pSBXmfq from @ajenglish (Can Haitian politics get any more interesting?)
-
+```
 
 
 
