@@ -45,6 +45,8 @@ The ad hoc search task is the same as in 2013. Each topic consists of a query *Q
 
 Each run should consist of up to 1000 results, where each result must refer to a tweet that is published prior to and including the query time defined by the topic. Evaluation will then be conducted by standard IR effectiveness measures. The official metric we will use is mean average precision, but we will report other standard metrics such as R-precision and precision at rank 30.
 
+As in previous years, judgment pools will be created from system output and manually assessed. Each tweet will be judged "not relevant", "relevant", or "highly-relevant".
+
 The topics will be in the same format as last year:
 
 ```
@@ -81,16 +83,16 @@ The fields are the topic number, an unused column, a tweet id, the rank of the t
 
 ### 4. Tweet Timeline Generation Task
 
-The Tweet Timeline Generation (TTG) task is a new task with a putative user model as follows: "I have an information need expressed by a query *Q* at time *t* and I would like a summary that captures relevant information that addresses my need." In this year's task, the summary is operationalized by a list of non-redundant, chronologically ordered tweets that occur before time *t*.
+Tweet Timeline Generation (TTG) is a new task for this year's Microblog track with a putative user model as follows: "I have an information need expressed by a query *Q* at time *t* and I would like a summary that captures relevant information." In this year's task, the summary is operationalized by a list of non-redundant, chronologically ordered tweets that occur before time *t*.
 
-TTG supplements the standard challenges of ad hoc retrieval with issues from topic detection and tracking (TDT) and multi-document summarization. In this years task (beyond ad hoc retrieval), systems will need to address two challenges:
+TTG supplements the standard challenges of ad hoc retrieval with issues from topic detection and tracking (TDT) and multi-document summarization. For this year (beyond ad hoc retrieval), systems will need to address two challenges:
 
-+ Detect (and eliminate) redundant tweets. Systems will be penalized for returning redundant tweets. This is equivalent to saying that systems must detect novelty.
-+ Determine how many results to return:\ that is, systems will be penalized for returning too many results.
++ Detect (and eliminate) redundant tweets, which is equivalent to saying that systems must detect novelty. Systems will not be given "credit" for returning tweets that contain redundant information.
++ Determine how many results to return:\ that is, systems will be penalized for results that are too verbose.
 
 Redundancy is operationalized as follows: for each pair of tweets, if the chronologically later tweet contains *substantive* information that is not present in the earlier tweet, the latter tweet is said to be *novel*; otherwise the two tweets are assumed to be *redundant*.  It is assumed that redundancy is transitive, i.e., if *A* and *B* are redundant and *B* and *C* are redundant, then *A* and *C* are assumed to be redundant.
 
-For example, consider the topic "Haiti Aristide return", the following tweets might be considered redundant:
+For example, consider the topic represented by the query "Haiti Aristide return". The following tweets might be considered redundant:
 
 ```
 32204788955357184	Haiti opens door for return of ex-president Aristide http://tf.to/fJDt
@@ -109,11 +111,10 @@ As well as the following:
 32547700427718657	BBC News - Haiti to issue ex-president Aristide with passport http://www.bbc.co.uk/news/world-latin-america-12330414
 ```
 
-We consider each of the group of tweets above to form a *semantic cluster*, representing an equivalence class of tweets that contain the same information. Each cluster can be represented be a *cluster representative*, which we take to be the first (chronologically earliest) tweet in each semantic cluster.
+We consider each of the group of tweets above a *semantic cluster*, representing an equivalence class of tweets that contain the same information. Each cluster can be represented be a *cluster representative*, which we take to be the first (chronologically earliest) tweet in each semantic cluster. Note that much like the notion of relevance, what constitutes *substantive* differences is in the eye of the assessor. For simplicity, this judgment is taken only on the level of tweets, *not* any smaller unit.
 
-Note that much like the notion of relevance, what constitutes *substantive* differences is in the eye of the assessor. For simplicity, this judgment is taken only on the level of tweets, *not* any smaller unit.
+Human assessors will create semantic clusters from the list of tweets judged to be "relevant" or "highly relevant" from the ad hoc task. These clusters will then be used to score system results. Examples for TREC topics from 2011 and 2012 that have been grouped into semantic clusters can be found [here](http://ylwang99.github.io/TweetTimelineGeneration/semantic-clusters.html).
 
-Human assessors will create semantic clusters from the list of tweets judged to be "relevant" or "highly relevant" from the ad hoc task. These clusters will then be used to score system results.
 
 
 **What follows below is just rough fodder --- DO NOT PAY ATTENTION (yet)**
