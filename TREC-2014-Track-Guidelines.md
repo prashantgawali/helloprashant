@@ -87,12 +87,12 @@ Tweet Timeline Generation (TTG) is a new task for this year's Microblog track wi
 
 TTG supplements the standard challenges of ad hoc retrieval with issues from topic detection and tracking (TDT) and multi-document summarization. For this year (beyond ad hoc retrieval), systems will need to address two challenges:
 
-+ Detect (and eliminate) redundant tweets, which is equivalent to saying that systems must detect novelty. Systems will be penalized for returning tweets that contain redundant information.
++ Detect (and eliminate) redundant tweets. This is equivalent to saying that systems must detect novelty. Systems will be penalized for returning tweets that contain redundant information.
 + Determine how many results to return: that is, systems will be penalized for results that are too verbose.
 
 Redundancy is operationalized as follows: for every pair of tweets, if the chronologically later tweet contains *substantive* information that is not present in the earlier tweet, the later tweet is said to be *novel*; otherwise the two tweets are *redundant*. It is assumed that redundancy is transitive, i.e., if *A* and *B* are redundant and *B* and *C* are redundant, then *A* and *C* are assumed to be redundant.
 
-For example, consider the topic represented by the query "Haiti Aristide return". The following tweets might be considered redundant:
+For example, consider the topic represented by the query "Haiti Aristide return". Given these results:
 
 ```
 32204788955357184	Haiti opens door for return of ex-president Aristide http://tf.to/fJDt
@@ -100,7 +100,7 @@ For example, consider the topic represented by the query "Haiti Aristide return"
 32469924240695297	Haiti allows ex-president Aristide's return http://t.co/pSBXmfq from @ajenglish (Can Haitian politics get any more interesting?)
 ```
 
-As well as the following:
+tweets 32211683082502144 and 32469924240695297 are redundant, given that tweet 32204788955357184 has been returned.  Likewise, given tweet 32250441588805633, tweets 32252735009062912 etc. are redundant:
 
 ```
 32250441588805633	Haiti to give Aristide passport: Officials in Haiti say they are ready to issue ex-president Jean-Bertrand Arist... http://bbc.in/eJlaNq
@@ -111,7 +111,9 @@ As well as the following:
 32547700427718657	BBC News - Haiti to issue ex-president Aristide with passport http://www.bbc.co.uk/news/world-latin-america-12330414
 ```
 
-We consider each group of tweets above a *semantic cluster*, representing an equivalence class of tweets that contain the same information (i.e., redundant). Each cluster can be represented be a *cluster representative*, which we take to be the first (chronologically earliest) tweet in each semantic cluster. Note that much like the notion of relevance, what constitutes *substantive* differences is in the eye of the assessor. For simplicity, this judgment is taken only on the level of tweets, *not* any smaller unit.
+We consider each group of tweets above a *semantic cluster*, representing an equivalence class of tweets that contain the same information (i.e., retrieving more than one cluster member is redundant). _The ideal TTG run would retrieve one and only one tweet from each cluster of each topic._ 
+
+Note that much like the notion of relevance, what constitutes *substantive* differences is in the eye of the assessor. For simplicity, this judgment is taken only on the level of tweets, *not* any smaller unit. 
 
 Human assessors will create semantic clusters from the list of tweets judged to be "relevant" or "highly relevant" from the ad hoc task. These clusters will then be used to score system results. A few examples of TREC topics from 2011 and 2012 that have been grouped into semantic clusters can be found [here](http://ylwang99.github.io/TweetTimelineGeneration/semantic-clusters.html).
 
@@ -127,7 +129,7 @@ The TTG output of a system should use the same format as the ad hoc task (i.e., 
 Unresolved issues, open for discussion:
 
 + How do we account for the fact that some semantic clusters are more important than others? One solution might be to weight the clusters (i.e., compute weighted precision and weighted recall). We could weight the clusters by relevance grade, i.e., "relevant" tweets get a weight of one and "highly-relevant" tweets get a weight of two. Thus, clusters with many highly-relevant tweets will get a higher weights.
-+ It might be desirable from the user perspective to see the earliest tweet in each cluster (i.e., the cluster representative). Currently, any tweet from the same semantic cluster is considered equivalent and receives the same credit. That is, retrieving the last tweet will yield the same score as retrieving the first tweet. We could institute some type of temporal penalty, or as an alternative, we could simply punt on the problem for this year.
++ Which tweet is the best exemplar of a given cluster?  It might be desirable from the user perspective to see the earliest tweet in each cluster (i.e., the cluster representative). However, for simplicity, in this year's TTG task, any tweet from the same semantic cluster is considered equivalent and receives the same credit. That is, retrieving the last tweet will yield the same score as retrieving the first tweet. We could institute some type of temporal penalty, or as an alternative, we could simply punt on the problem for this year.
 
 ### 5. External and Future Evidence
 
