@@ -81,6 +81,8 @@ MB02 Q0 3857291214283390 1000 0.000001 myRun
 
 The fields are the topic number, an unused column, a tweet id, the rank of the tweet defined by the run, the score of the tweet by your system, and the identifier for the run (the "run tag"). 
 
+Note that system output will be evaluated using `trec_eval` to compute the various metrics: `trec_eval` uses the score as the definitive ranking key. That is, if there are tied scores the program will break those ties arbitrarily, ignoring the rank field. 
+
 ### 4. Tweet Timeline Generation Task
 
 Tweet Timeline Generation (TTG) is a new task for this year's Microblog track with a putative user model as follows: "I have an information need expressed by a query *Q* at time *t* and I would like a summary that captures relevant information." In this year's task, the summary is operationalized by a list of non-redundant, chronologically ordered tweets that occur before time *t*.
