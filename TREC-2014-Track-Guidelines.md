@@ -100,7 +100,7 @@ For example, consider the topic represented by the query "Haiti Aristide return"
 32469924240695297	Haiti allows ex-president Aristide's return http://t.co/pSBXmfq from @ajenglish (Can Haitian politics get any more interesting?)
 ```
 
-tweets 32211683082502144 and 32469924240695297 are redundant, given that tweet 32204788955357184 has been returned.  Likewise, given tweet 32250441588805633, tweets 32252735009062912 etc. are redundant:
+Tweets `'144` and 32469924240695297 are redundant, given that tweet 32204788955357184 has been returned.  Likewise, given tweet 32250441588805633, tweets 32252735009062912 etc. are redundant:
 
 ```
 32250441588805633	Haiti to give Aristide passport: Officials in Haiti say they are ready to issue ex-president Jean-Bertrand Arist... http://bbc.in/eJlaNq
