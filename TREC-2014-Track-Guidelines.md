@@ -100,7 +100,7 @@ For example, consider the topic represented by the query "Haiti Aristide return"
 32469924240695297	Haiti allows ex-president Aristide's return http://t.co/pSBXmfq from @ajenglish (Can Haitian politics get any more interesting?)
 ```
 
-Tweets `'144` and 32469924240695297 are redundant, given that tweet 32204788955357184 has been returned.  Likewise, given tweet 32250441588805633, tweets 32252735009062912 etc. are redundant:
+Tweets `'144` and `'297` are redundant, given that tweet `'184` has been returned. As another example, in the following, tweet `'633`, tweets `'912`, etc. are redundant:
 
 ```
 32250441588805633	Haiti to give Aristide passport: Officials in Haiti say they are ready to issue ex-president Jean-Bertrand Arist... http://bbc.in/eJlaNq
@@ -111,15 +111,15 @@ Tweets `'144` and 32469924240695297 are redundant, given that tweet 322047889553
 32547700427718657	BBC News - Haiti to issue ex-president Aristide with passport http://www.bbc.co.uk/news/world-latin-america-12330414
 ```
 
-We consider each group of tweets above a *semantic cluster*, representing an equivalence class of tweets that contain the same information (i.e., retrieving more than one cluster member is redundant). _The ideal TTG run would retrieve one and only one tweet from each cluster of each topic._ 
+We consider each group of tweets above a *semantic cluster*, representing an equivalence class of tweets that contain the same information (i.e., retrieving more than one cluster member is redundant). The ideal TTG run would retrieve one and only one tweet from each cluster of each topic.
 
-Note that much like the notion of relevance, what constitutes *substantive* differences is in the eye of the assessor. For simplicity, this judgment is taken only on the level of tweets, *not* any smaller unit. 
+Note that much like the notion of relevance, what constitutes *substantive* differences is in the eye of the assessor. For simplicity, this judgment is taken only on the level of tweets, *not* any smaller unit. Also note that the contents of linked URLs are ignored when creating the semantic clusters.
 
-Human assessors will create semantic clusters from the list of tweets judged to be "relevant" or "highly relevant" from the ad hoc task. These clusters will then be used to score system results. A few examples of TREC topics from 2011 and 2012 that have been grouped into semantic clusters can be found [here](http://ylwang99.github.io/TweetTimelineGeneration/semantic-clusters.html).  These clusters are provided to help teams train their systems; the methodology used to generate these clusters is identical to how this year's clusters will be made.
+Human assessors will create semantic clusters from the list of tweets judged to be "relevant" or "highly relevant" from the ad hoc task. These clusters will then be used to score system results. A few examples of TREC topics from 2011 and 2012 that have been grouped into semantic clusters can be found [here](http://ylwang99.github.io/TweetTimelineGeneration/semantic-clusters.html) or [this prettier version](http://ylwang99.github.io/TweetTimelineGeneration/semantic-clusters-tweetstyle.html). These clusters are provided to help teams train their systems (they will be available in a machine-readable form soon); the methodology used to generate these clusters is identical to how this year's clusters will be created.
 
 The *tentative* metric for scoring summaries will be the F1 metric that combines the following:
 
-+ Cluster precision. Of tweets returned by the system, how many *distinct* semantic clusters are represented? Note that the system does not get "credit" for retrieving multiple tweets from the same semantic cluster (in fact, redundant tweets lower precision).
++ Cluster precision. Of tweets returned by the system, how many *distinct* semantic clusters are represented? To be precise, the denominator of the precision calculation is the total number of results returned by the system. Thus, the system does not get "credit" for retrieving multiple tweets from the same semantic cluster (in fact, redundant tweets lower precision).
 + Cluster recall. Of the semantic clusters discovered by the assessor, how many are represented in the system's output? As with the precision calculation, the system does not get "credit" for retrieving multiple tweets from the same semantic cluster.
 
 The F1 metric combines precision and recall [in the usual way](http://en.wikipedia.org/wiki/F1_score).
@@ -130,6 +130,7 @@ Unresolved issues, open for discussion:
 
 + How do we account for the fact that some semantic clusters are more important than others? One solution might be to weight the clusters (i.e., compute weighted precision and weighted recall). We could weight the clusters by relevance grade, i.e., "relevant" tweets get a weight of one and "highly-relevant" tweets get a weight of two. Thus, clusters with many highly-relevant tweets will get a higher weights.
 + Which tweet is the best exemplar of a given cluster?  It might be desirable from the user perspective to see the earliest tweet in each cluster (i.e., the cluster representative). However, for simplicity, in this year's TTG task, any tweet from the same semantic cluster is considered equivalent and receives the same credit. That is, retrieving the last tweet will yield the same score as retrieving the first tweet. We could institute some type of temporal penalty, or as an alternative, we could simply punt on the problem for this year.
++ What do we do about unjudged tweets? We will treat as not relevant.
 
 ### 5. External and Future Evidence
 
