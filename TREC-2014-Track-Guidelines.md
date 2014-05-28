@@ -115,7 +115,7 @@ We consider each group of tweets above a *semantic cluster*, representing an equ
 
 Note that much like the notion of relevance, what constitutes *substantive* differences is in the eye of the assessor. For simplicity, this judgment is taken only on the level of tweets, *not* any smaller unit. 
 
-Human assessors will create semantic clusters from the list of tweets judged to be "relevant" or "highly relevant" from the ad hoc task. These clusters will then be used to score system results. A few examples of TREC topics from 2011 and 2012 that have been grouped into semantic clusters can be found [here](http://ylwang99.github.io/TweetTimelineGeneration/semantic-clusters.html).
+Human assessors will create semantic clusters from the list of tweets judged to be "relevant" or "highly relevant" from the ad hoc task. These clusters will then be used to score system results. A few examples of TREC topics from 2011 and 2012 that have been grouped into semantic clusters can be found [here](http://ylwang99.github.io/TweetTimelineGeneration/semantic-clusters.html).  These clusters are provided to help teams train their systems; the methodology used to generate these clusters is identical to how this year's clusters will be made.
 
 The *tentative* metric for scoring summaries will be the F1 metric that combines the following:
 
