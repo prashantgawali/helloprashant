@@ -12,6 +12,8 @@ The timeline for the evaluation is as follows:
 + Mid-September 2014: Relevance assessments released
 + November 2014: TREC conference at Gaithersburg MD, USA
 
+The temporally-anchored ad hoc retrieval task is described in Section 3, and the tweet timeline generation (TTG) task is described in Section 4. Note that you can choose to participate in the ad hoc retrieval task *only*. However, if you decide to participate in the TTG task, you must also submit to the ad hoc retrieval task.
+
 ### 1. How to Participate
 
 In order to participate in the TREC 2014 Microblog track, you need to register to participate in TREC. See the [call for participation](http://trec.nist.gov/pubs/call2014.html). The call will close in late May.
@@ -41,7 +43,7 @@ Community members are encouraged to suggest functionality for the API that would
 
 ### 3. Temporally-Anchored Ad Hoc Search Task
 
-The ad hoc search task is the same as in 2013. Each topic consists of a query *Q* and a time *t*. The system's task is to return a list relevant tweets up until time *t*. Novelty and redundancy are not considered for this task.
+The ad hoc search task is the same as in 2013. Each topic consists of a query *Q* and a time *t*. The system's task is to return a list relevant tweets up until time *t*. Novelty and redundancy are not considered for this task. Note that you can choose to participate in this task *only* (and not participate in the TTG task).
 
 Each run should consist of up to 1000 results, where each result must refer to a tweet that is published prior to and including the query time defined by the topic. Evaluation will then be conducted by standard IR effectiveness measures. The official metric we will use is mean average precision, but we will report other standard metrics such as R-precision and precision at rank 30.
 
@@ -86,6 +88,8 @@ Note that system output will be evaluated using `trec_eval` to compute the vario
 ### 4. Tweet Timeline Generation Task
 
 Tweet Timeline Generation (TTG) is a new task for this year's Microblog track with a putative user model as follows: "I have an information need expressed by a query *Q* at time *t* and I would like a summary that captures relevant information." In this year's task, the summary is operationalized by a list of non-redundant, chronologically ordered tweets that occur before time *t*.
+
+Note that if you decide to participate in the TTG task, you must also participate in (i.e., submit runs to) the ad hoc retrieval task.
 
 TTG supplements the standard challenges of ad hoc retrieval with issues from topic detection and tracking (TDT) and multi-document summarization. For this year (beyond ad hoc retrieval), systems will need to address two challenges:
 
