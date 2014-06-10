@@ -1,8 +1,8 @@
 **Track coordinators:** Jimmy Lin and Miles Efron
 
-### DRAFT GUIDELINES -- THIS IS A WORK IN PROGRESS!
+*Note*: As of June 10th, 2014, these guidelines are reasonably final. There will be no major deviations from these track guidelines, although this document may be tweaked for refinement and clarification purposes.
 
-These are the guidelines for the TREC 2014 Microblog track, which is the fourth running of the track. In addition to temporally-anchored ad hoc retrieval (same as last year), this year's track will consist of an additional new task: tweet timeline generation (TTG).
+These are the guidelines for the TREC 2014 Microblog track, which is the fourth iteration of the track. In addition to temporally-anchored ad hoc retrieval (same as last year), this year's track will consist of an additional new task: tweet timeline generation (TTG).
 
 The timeline for the evaluation is as follows:
 
@@ -12,7 +12,9 @@ The timeline for the evaluation is as follows:
 + Mid-September 2014: Relevance assessments released
 + November 2014: TREC conference at Gaithersburg MD, USA
 
-The temporally-anchored ad hoc retrieval task is described in Section 3, and the tweet timeline generation (TTG) task is described in Section 4. Note that you can choose to participate in the ad hoc retrieval task *only*. However, if you decide to participate in the TTG task, you must also submit to the ad hoc retrieval task.
+The temporally-anchored ad hoc retrieval task is described in Section 3, and the tweet timeline generation (TTG) task is described in Section 4.
+
+**Note**: You can choose to participate in the ad hoc retrieval task *only*. However, if you decide to participate in the TTG task, you *must* also submit to the ad hoc retrieval task.
 
 ### 1. How to Participate
 
