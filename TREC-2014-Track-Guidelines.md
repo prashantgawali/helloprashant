@@ -22,7 +22,7 @@ In order to participate in the TREC 2014 Microblog track, you need to register t
 
 The Microblog track in 2014 will use the "evaluation as a service" (EaaS) model (more below), where teams interact with the official corpus via a common API. Thus, you need to request access to the API via the following steps:
 
-**NOTE**: If you participated in TREC 2013 and already have access to the API, you do not need to do anything.
+**Note**: If you participated in TREC 2013 and already have access to the API, you do not need to do anything.
 
 1. Fill out the [API usage agreement](http://lintool.github.io/twitter-tools/API-agreement.pdf).
 2. Email the usage agreement to `microblog-request@nist.gov`.
@@ -33,7 +33,7 @@ Note that the file is password protected with the same username/password combina
 
 ### 2. The "Evaluation as a Service" Model
 
-The TREC 2014 Microblog track will use the same collection of tweets as last year (informally, we refer to this as the Tweets2013 collection). It contains 243 million tweets gathered from the (sampled) public Twitter stream from February 1, 2013 to March 31, 2013 (inclusive, UTC time). Just like last year, we will be adopting the "evaluation as a service" model. A description of the model can be found in the [2013 track overview paper](http://www.umiacs.umd.edu/~jimmylin/publications/Lin_Efron_TREC2013_notebook.pdf). The basic idea is that participants will interact with the tweet collection via a search API. Use of the API will be limited to registered TREC participants. To use the track API, teams must obtain authentication credentials (via the instructions above).
+The TREC 2014 Microblog track will use the same collection of tweets as last year (informally, we refer to this as the Tweets2013 collection). It contains 243 million tweets gathered from the (sampled) public Twitter stream from February 1, 2013 to March 31, 2013 (inclusive, UTC time). Just like last year, we will be adopting the "evaluation as a service" (EaaS) model. A description of the model can be found in the [2013 track overview paper](http://www.umiacs.umd.edu/~jimmylin/publications/Lin_Efron_TREC2013_notebook.pdf). The basic idea is that participants will interact with the tweet collection via a search API. Use of the API will be limited to registered TREC participants. To use the track API, teams must obtain authentication credentials (via the instructions above).
 
 **Note that the collection is not available for download. The search API is the only mechanism for accessing the collection and completing the track tasks** 
 
@@ -45,7 +45,7 @@ Community members are encouraged to suggest functionality for the API that would
 
 ### 3. Temporally-Anchored Ad Hoc Search Task
 
-The ad hoc search task is the same as in 2013. Each topic consists of a query *Q* and a time *t*. The system's task is to return a list relevant tweets up until time *t*. Novelty and redundancy are not considered for this task. Note that you can choose to participate in this task *only* (and not participate in the TTG task).
+The ad hoc search task is the same as in 2013. Each topic consists of a query *Q* and a time *t*. The system's task is to return a list relevant tweets up until time *t*. Novelty and redundancy are not considered for this task. You can choose to participate in this task only and not participate in the TTG task.
 
 Each run should consist of up to 1000 results, where each result must refer to a tweet that is published prior to and including the query time defined by the topic. Evaluation will then be conducted by standard IR effectiveness measures. The official metric we will use is mean average precision, but we will report other standard metrics such as R-precision and precision at rank 30.
 
@@ -67,9 +67,9 @@ where:
 + the `querytime` contains the timestamp of the query in a human and machine readable ISO standard form.
 + the `querytweettime` tag contains the timestamp of the query in terms of the chronologically nearest tweet id within the corpus.
 
-NIST will create new topics for the purposes of this task. No narrative and description tags are provided.  But the topic developer/assessor will record a clearly defined information need  when the topic is created. 
+NIST will create new topics for the purposes of this task. No narrative and description tags are provided. However, the topic developer/assessor will record a clearly defined information need when the topic is created. 
 
-For each topic, systems should score each possibly relevant tweet with ID's less than or equal to the query's querytweettime element. Note that while tweet ids are not strictly chronologically ordered, we consider querytweettime to be definitive in preference to querytime.
+For each topic, systems should score each possibly relevant tweet with ids less than or equal to the query's `querytweettime` element. Note that `querytweettime` is considered to be definitive in preference to `querytime`.
 
 Participating groups may submit up to four runs. At least one run should not use any external or future source of evidence (see below for a description of external and future sources of evidence). The use of future evidence is discouraged but the use of timely external resources is encouraged. 
 
