@@ -71,7 +71,7 @@ NIST will create new topics for the purposes of this task. No narrative and desc
 
 For each topic, systems should score each possibly relevant tweet with ids less than or equal to the query's `querytweettime` element. Note that `querytweettime` is considered to be definitive in preference to `querytime`.
 
-Participating groups may submit up to four runs. At least one run should not use any external or future source of evidence (see below for a description of external and future sources of evidence). The use of future evidence is discouraged but the use of timely external resources is encouraged. 
+*Note that the following is slightly different from last year:* Participating groups may submit up to four runs. External evidence can be used (in fact, encouraged), but future evidence cannot (see below for a more detailed discussion). Manual runs (i.e., runs with human involvement) are also welcome.
 
 Submitted runs must follow standard TREC format:
 
@@ -85,7 +85,7 @@ MB02 Q0 3857291214283390 1000 0.000001 myRun
 
 The fields are the topic number, an unused column, a tweet id, the rank of the tweet defined by the run, the score of the tweet by your system, and the identifier for the run (the "run tag"). 
 
-Note that system output will be evaluated using `trec_eval` to compute the various metrics: `trec_eval` uses the score as the definitive ranking key. That is, if there are tied scores the program will break those ties arbitrarily, ignoring the rank field. 
+System output will be evaluated using `trec_eval` to compute the various metrics: `trec_eval` uses the score as the definitive ranking key. That is, if there are tied scores the program will break those ties arbitrarily, ignoring the rank field. 
 
 ### 4. Tweet Timeline Generation Task
 
