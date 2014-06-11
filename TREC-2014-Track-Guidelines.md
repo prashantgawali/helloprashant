@@ -132,13 +132,13 @@ System output will be evaluated in terms of cluster precision and cluster recall
 
 For summary purposes, precision and recall will be combined into the F1 metric [in the usual way](http://en.wikipedia.org/wiki/F1_score).
 
+The *weighted* versions of the above metrics attempts to account for the fact that some semantic clusters are (intuitively) more important than others. Each cluster is weighted by relevance grade: "relevant" tweets get a weight of one and "highly-relevant" tweets get a weight of two. These weights are then factored into the precision and recall computation. For example, if we have two semantic clusters, where cluster 1 has two relevant tweets and cluster 2 has one relevant tweet, then cluster 1 will be twice as important as cluster 2. Alternatively, if cluster 1 has one highly-relevant tweet and cluster 2 has one relevant tweet, cluster 1 will also be twice as important as cluster 2. In both cases, a run that retrieves a tweet from cluster 1 but not cluster 2 will achieve a weighted recall of 2/3 (as opposed to 1/2 in the unweighted case). The weights are similarly applied to the precision calculation.
+
 The TTG output of a system should use the same format as the ad hoc task (i.e., standard TREC format), although note that the rank and score fields are essentially ignored.
 
-Unresolved issues, open for discussion:
+One unresolved issue that we are explicitly not addressing in this year's evaluation is this: Which tweet is the best exemplar of a given cluster? It might be desirable from the user perspective to see the earliest tweet in each cluster (i.e., the cluster representative), but arguments can be made for other tweets as well (e.g., the tweet from the most reputable user). For simplicity, in this year's TTG task, any tweet from the same semantic cluster is considered equivalent and receives the same credit. That is, retrieving the last tweet will yield the same score as retrieving the first tweet.
 
-+ How do we account for the fact that some semantic clusters are more important than others? One solution might be to weight the clusters (i.e., compute weighted precision and weighted recall). We could weight the clusters by relevance grade, i.e., "relevant" tweets get a weight of one and "highly-relevant" tweets get a weight of two. Thus, clusters with many highly-relevant tweets will get a higher weights.
-+ Which tweet is the best exemplar of a given cluster?  It might be desirable from the user perspective to see the earliest tweet in each cluster (i.e., the cluster representative). However, for simplicity, in this year's TTG task, any tweet from the same semantic cluster is considered equivalent and receives the same credit. That is, retrieving the last tweet will yield the same score as retrieving the first tweet. We could institute some type of temporal penalty, or as an alternative, we could simply punt on the problem for this year.
-+ What do we do about unjudged tweets? We will treat as not relevant.
+Unjudged tweets in the TTG task will be considered not relevant. This situation may arise if a tweet in the TTG output does not appear in the judgment pool for the ad hoc task (i.e., the tweet is below the pool depth in the ad hoc run). However, we do not anticipate this to be a significant problem, as we expect the number of clusters (per topic) to be smaller than the pool depth.
 
 ### 5. External and Future Evidence
 
