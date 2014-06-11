@@ -136,18 +136,22 @@ The *weighted* versions of the above metrics attempts to account for the fact th
 
 The TTG output of a system should use the same format as the ad hoc task (i.e., standard TREC format), although note that the rank and score fields are essentially ignored.
 
+Participating groups may submit up to four runs. External evidence can be used (in fact, encouraged), but the runs **cannot** take advantage of future evidence (see below for a more detailed discussion). Manual runs (i.e., runs with human involvement) are also welcome.
+
 One unresolved issue that we are explicitly not addressing in this year's evaluation is this: Which tweet is the best exemplar of a given cluster? It might be desirable from the user perspective to see the earliest tweet in each cluster (i.e., the cluster representative), but arguments can be made for other tweets as well (e.g., the tweet from the most reputable user). For simplicity, in this year's TTG task, any tweet from the same semantic cluster is considered equivalent and receives the same credit. That is, retrieving the last tweet will yield the same score as retrieving the first tweet.
 
 Unjudged tweets in the TTG task will be considered not relevant. This situation may arise if a tweet in the TTG output does not appear in the judgment pool for the ad hoc task (i.e., the tweet is below the pool depth in the ad hoc run). However, we do not anticipate this to be a significant problem, as we expect the number of clusters (per topic) to be smaller than the pool depth.
 
 ### 5. External and Future Evidence
 
-The use of external or future evidence should be acknowledged for every submitted run. In particular, we define external and future evidence as follows:
+First, a few definitions:
 
-**External Evidence:** Evidence obtained from sources other than the official API - for instance, this encompasses other tweets or information from Twitter, as well as other corpora, e.g., Wikipedia or the web.
+**External Evidence:** Evidence obtained from sources other than the official API. This encompasses other tweets or information from Twitter, as well as other corpora, e.g., Wikipedia or the web (including pages linked to from the tweets).
 
 **Future evidence:** Information that would not have been available to the system at the timestamp of the query.  
 
-For example, if you make use of a Wikipedia snapshot from June 2013 (i.e., after the corpus was collected), then this is both an external and future evidence. But a Wikipedia snapshot from January 2013 is considered external but not future evidence.
+Future evidence is not allowed in either the ad hoc task or the TTG task.
 
-Note that for operational simplicity, *general* statistics obtained from the search API (e.g., term frequency, collection probabilities) will not be considered future evidence, unless you are *specifically* computing statistics over tweets that are after the query time.
+For example, a Wikipedia snapshot from June 2013 (i.e., after the corpus was collected) would be considered both external and future evidence (not allowed). But a Wikipedia snapshot from January 2013 would be considered external but not future evidence (perfectly fine).
+
+Note that for operational simplicity, *general* statistics obtained from the search API (e.g., term frequency, collection probabilities) will not be considered future evidence, unless you are *specifically* computing statistics over tweets that are after the query time. More detailed discussion of these nuances appear in Wang and Lin, [The Impact of Future Term Statistics in Real-Time Tweet Search](http://www.umiacs.umd.edu/~jimmylin/publications/Wang_Lin_ECIR2014.pdf) from ECIR 2014.
