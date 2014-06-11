@@ -154,4 +154,6 @@ Future evidence is not allowed in either the ad hoc task or the TTG task.
 
 For example, a Wikipedia snapshot from June 2013 (i.e., after the corpus was collected) would be considered both external and future evidence (not allowed). But a Wikipedia snapshot from January 2013 would be considered external but not future evidence (perfectly fine).
 
-Note that for operational simplicity, *general* statistics obtained from the search API (e.g., term frequency, collection probabilities) will not be considered future evidence, unless you are *specifically* computing statistics over tweets that are after the query time. More detailed discussion of these nuances appear in Wang and Lin, [The Impact of Future Term Statistics in Real-Time Tweet Search](http://www.umiacs.umd.edu/~jimmylin/publications/Wang_Lin_ECIR2014.pdf) from ECIR 2014.
+Note that for operational simplicity, *general* statistics obtained from the search API (e.g., term frequency, collection probabilities) will not be considered future evidence, unless you are *specifically* computing statistics over tweets that are after the query time. 
+
+Note that *technically*, the API itself uses future information, since it uses term statistics across the entire corpus, which includes tweets after the query time. However, we have verified that this is "okay". See detailed discussion in Wang and Lin, [The Impact of Future Term Statistics in Real-Time Tweet Search](http://www.umiacs.umd.edu/~jimmylin/publications/Wang_Lin_ECIR2014.pdf) (ECIR 2014).
