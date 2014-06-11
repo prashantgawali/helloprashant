@@ -14,7 +14,7 @@ The timeline for the evaluation is as follows:
 
 The temporally-anchored ad hoc retrieval task is described in Section 3, and the tweet timeline generation (TTG) task is described in Section 4.
 
-**Note**: You can choose to participate in the ad hoc retrieval task *only*. However, if you decide to participate in the TTG task, you *must* also submit to the ad hoc retrieval task.
+**Note**: You can choose to participate in the ad hoc retrieval task and not participate in the TTG task. However, if you decide to participate in the TTG task, you *must* also submit to the ad hoc retrieval task.
 
 ### 1. How to Participate
 
@@ -22,7 +22,7 @@ In order to participate in the TREC 2014 Microblog track, you need to register t
 
 The Microblog track in 2014 will use the "evaluation as a service" (EaaS) model (more below), where teams interact with the official corpus via a common API. Thus, you need to request access to the API via the following steps:
 
-**Note**: If you participated in TREC 2013 and already have access to the API, you do not need to do anything.
+**Note**: If you participated in TREC 2013 and already have access to the API, you do not need to do anything. You can continue accessing the API as before.
 
 1. Fill out the [API usage agreement](http://lintool.github.io/twitter-tools/API-agreement.pdf).
 2. Email the usage agreement to `microblog-request@nist.gov`.
@@ -121,39 +121,39 @@ Tweets `'144` and `'297` are redundant, given that tweet `'184` has been returne
 
 We consider each group of tweets above a *semantic cluster*, representing an equivalence class of tweets that contain the same information (i.e., retrieving more than one cluster member is redundant). The ideal TTG run would retrieve one and only one tweet from each cluster of each topic.
 
-Note that much like the notion of relevance, what constitutes *substantive* differences is in the eye of the assessor. For simplicity, this judgment is provided only on the level of tweets, *not* any smaller unit. Contents of linked URLs are ignored when creating the semantic clusters.
+Note that much like the notion of relevance, what constitutes *substantive* differences is in the eye of the assessor. For simplicity, this judgment is provided only at the level of tweets, *not* any smaller unit. Contents of linked URLs are ignored when creating the semantic clusters.
 
 Human assessors will create semantic clusters from the list of tweets judged to be "relevant" or "highly relevant" from the ad hoc task. These clusters will then be used to score system results. A few examples of TREC topics from 2011 and 2012 that have been grouped into semantic clusters can be found [here](http://ylwang99.github.io/TweetTimelineGeneration/semantic-clusters.html) or [this prettier version](http://ylwang99.github.io/TweetTimelineGeneration/semantic-clusters-twitterstyle.html). These clusters are provided to help teams train their systems (they will be available in a machine-readable form soon); the methodology used to generate these clusters is identical to how this year's clusters will be created.
 
-System output will be evaluated in terms of cluster precision and cluster recall. There will be two different versions of the metric, an *unweighted* and a *weighted* version. The unweighted versions are defined as follows:
+System output will be evaluated in terms of cluster precision and cluster recall. There will be two different versions of the metric, an *unweighted* version and a *weighted* version. The unweighted version is defined as follows:
 
-+ **Cluster precision (unweighted).** Of tweets returned by the system, how many *distinct* semantic clusters are represented? To be precise, the denominator of the precision calculation is the total number of results returned by the system. Thus, the system does not get "credit" for retrieving multiple tweets from the same semantic cluster (in fact, redundant tweets lower precision).
++ **Cluster precision (unweighted).** Of tweets returned by the system, how many *distinct* semantic clusters are represented? The denominator of the precision calculation is the total number of results (tweets) returned by the system. Thus, the system does not get "credit" for retrieving multiple tweets from the same semantic cluster (in fact, redundant tweets lower precision since they increase the denominator).
 + **Cluster recall (unweighted).** Of the semantic clusters discovered by the assessor, how many are represented in the system's output? As with the precision calculation, the system does not get "credit" for retrieving multiple tweets from the same semantic cluster.
 
 For summary purposes, precision and recall will be combined into the F1 metric [in the usual way](http://en.wikipedia.org/wiki/F1_score).
 
-The *weighted* versions of the above metrics attempt to account for the fact that some semantic clusters are (intuitively) more important than others. Each cluster will be weighted by relevance grade: "relevant" tweets get a weight of one and "highly-relevant" tweets get a weight of two. These weights are then factored into the precision and recall computations. For example, if we have two semantic clusters, where cluster 1 has two relevant tweets and cluster 2 has one relevant tweet, then cluster 1 will be twice as important as cluster 2. Alternatively, if cluster 1 has one highly-relevant tweet and cluster 2 has one relevant tweet, cluster 1 will also be twice as important as cluster 2. In both cases, a run that retrieves a tweet from cluster 1 but not cluster 2 will achieve a weighted recall of 2/3 (as opposed to 1/2 in the unweighted case). The weights are similarly applied to the precision calculation.
+The *weighted* version of the above metrics attempts to account for the fact that some semantic clusters are (intuitively) more important than others. Each cluster will be weighted by relevance grade: "relevant" tweets get a weight of one and "highly-relevant" tweets get a weight of two. These weights are then factored into the precision and recall computations. For example, if we have two semantic clusters, where cluster 1 has two relevant tweets and cluster 2 has one relevant tweet, then cluster 1 will be twice as important as cluster 2. Alternatively, if cluster 1 has one highly-relevant tweet and cluster 2 has one relevant tweet, cluster 1 will also be twice as important as cluster 2. In both cases, a run that retrieves a tweet from cluster 1 but not cluster 2 will achieve a weighted recall of 2/3 (as opposed to 1/2 in the unweighted case). The weights are similarly applied to the precision calculation.
 
-The TTG output of a system should use the same format as the ad hoc task (i.e., standard TREC format), although note that the rank and score fields are essentially ignored.
+The TTG output of a system should be in the same format as the ad hoc task (i.e., standard TREC format), although note that the rank and score fields are essentially ignored.
 
 Participating groups may submit up to four runs. External evidence can be used (in fact, encouraged), but the runs **cannot** take advantage of future evidence (see below for a more detailed discussion). Manual runs (i.e., runs with human involvement) are also welcome.
 
-One unresolved issue that we are explicitly not addressing in this year's evaluation is this: Which tweet is the best exemplar of a given cluster? It might be desirable from the user perspective to see the earliest tweet in each cluster (i.e., the cluster representative), but arguments can be made for other tweets as well (e.g., the tweet from the most reputable user). A case can be made for penalizing a system for not retrieving the earliest tweet, but this would be difficult to model without better understanding user needs. For simplicity, in this year's TTG task, any tweet from the same semantic cluster will be considered equivalent and will receive the same credit. That is, retrieving the last tweet will yield the same score as retrieving the first tweet.
+One unresolved issue that we are explicitly not addressing in this year's evaluation is this: Which tweet is the best exemplar of a given cluster? It might be desirable from the user perspective to see the earliest tweet in each cluster, but arguments can be made for other tweets as well (e.g., the tweet from the most reputable user). A case can be made for penalizing a system for not retrieving the earliest tweet, but this would be difficult to model without better understanding user needs. For simplicity, in this year's TTG task, any tweet from the same semantic cluster will be considered equivalent and will receive the same credit. That is, retrieving the last tweet will yield the same score as retrieving the first tweet.
 
 Unjudged tweets in the TTG task will be considered not relevant. This situation may arise if a tweet in the TTG output does not appear in the judgment pool for the ad hoc task (i.e., the tweet is below the pool depth in the ad hoc run). However, we do not anticipate this to be a significant problem, as we expect the number of clusters (per topic) to be smaller than the pool depth. We will monitor the situation and confirm via post hoc analyses that this potential concern does not impact evaluation reliability.
 
 ### 5. External and Future Evidence
 
-First, a few definitions:
+Two definitions:
 
 **External Evidence:** Evidence obtained from sources other than the official API. This encompasses other tweets or information from Twitter, as well as other corpora, e.g., Wikipedia or the web (including pages linked to from the tweets).
 
 **Future evidence:** Information that would not have been available to the system at the timestamp of the query.  
 
-Future evidence is not allowed in either the ad hoc task or the TTG task.
+Future evidence is **not** allowed in either the ad hoc task or the TTG task.
 
 For example, a Wikipedia snapshot from June 2013 (i.e., after the corpus was collected) would be considered both external and future evidence (not allowed). But a Wikipedia snapshot from January 2013 would be considered external but not future evidence (perfectly fine).
 
-Note that for operational simplicity, *general* statistics obtained from the search API (e.g., term frequency, collection probabilities) will not be considered future evidence, unless you are *specifically* computing statistics over tweets that are after the query time. 
-
 Note that *technically*, the API itself uses future information, since it uses term statistics across the entire corpus, which includes tweets after the query time. However, we have verified that this is "okay". See detailed discussion in Wang and Lin, [The Impact of Future Term Statistics in Real-Time Tweet Search](http://www.umiacs.umd.edu/~jimmylin/publications/Wang_Lin_ECIR2014.pdf) (ECIR 2014).
+
+Thus, for operational simplicity, *general* statistics obtained from the search API (e.g., term frequency, collection probabilities) will not be considered future evidence, unless you are *specifically* computing statistics over tweets that are after the query time. 
