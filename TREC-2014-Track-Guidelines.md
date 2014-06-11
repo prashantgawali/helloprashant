@@ -71,7 +71,7 @@ NIST will create new topics for the purposes of this task. No narrative and desc
 
 For each topic, systems should score each possibly relevant tweet with ids less than or equal to the query's `querytweettime` element. Note that `querytweettime` is considered to be definitive in preference to `querytime`.
 
-*Note that the following is slightly different from last year:* Participating groups may submit up to four runs. External evidence can be used (in fact, encouraged), but future evidence cannot (see below for a more detailed discussion). Manual runs (i.e., runs with human involvement) are also welcome.
+*Note that the following is slightly different from last year:* Participating groups may submit up to four runs. External evidence can be used (in fact, encouraged), but the runs **cannot** take advantage of future evidence (see below for a more detailed discussion). Manual runs (i.e., runs with human involvement) are also welcome.
 
 Submitted runs must follow standard TREC format:
 
@@ -91,7 +91,7 @@ System output will be evaluated using `trec_eval` to compute the various metrics
 
 Tweet Timeline Generation (TTG) is a new task for this year's Microblog track with a putative user model as follows: "I have an information need expressed by a query *Q* at time *t* and I would like a summary that captures relevant information." In this year's task, the summary is operationalized by a list of non-redundant, chronologically ordered tweets that occur before time *t*.
 
-Note that if you decide to participate in the TTG task, you must also participate in (i.e., submit runs to) the ad hoc retrieval task.
+Note that if you decide to participate in the TTG task, you must also participate in (i.e., submit runs to) the ad hoc retrieval task. In fact, a submission to the TTG is also a valid (but not necessarily effective) submission to the ad hoc task (more details below).
 
 TTG supplements the standard challenges of ad hoc retrieval with issues from topic detection and tracking (TDT) and multi-document summarization. For this year (beyond ad hoc retrieval), systems will need to address two challenges:
 
@@ -121,16 +121,16 @@ Tweets `'144` and `'297` are redundant, given that tweet `'184` has been returne
 
 We consider each group of tweets above a *semantic cluster*, representing an equivalence class of tweets that contain the same information (i.e., retrieving more than one cluster member is redundant). The ideal TTG run would retrieve one and only one tweet from each cluster of each topic.
 
-Note that much like the notion of relevance, what constitutes *substantive* differences is in the eye of the assessor. For simplicity, this judgment is taken only on the level of tweets, *not* any smaller unit. Also note that the contents of linked URLs are ignored when creating the semantic clusters.
+Note that much like the notion of relevance, what constitutes *substantive* differences is in the eye of the assessor. For simplicity, this judgment is provided only on the level of tweets, *not* any smaller unit. Contents of linked URLs are ignored when creating the semantic clusters.
 
 Human assessors will create semantic clusters from the list of tweets judged to be "relevant" or "highly relevant" from the ad hoc task. These clusters will then be used to score system results. A few examples of TREC topics from 2011 and 2012 that have been grouped into semantic clusters can be found [here](http://ylwang99.github.io/TweetTimelineGeneration/semantic-clusters.html) or [this prettier version](http://ylwang99.github.io/TweetTimelineGeneration/semantic-clusters-twitterstyle.html). These clusters are provided to help teams train their systems (they will be available in a machine-readable form soon); the methodology used to generate these clusters is identical to how this year's clusters will be created.
 
-The *tentative* metric for scoring summaries will be the F1 metric that combines the following:
+System output will be evaluated in terms of cluster precision and cluster recall. There will be two different versions of the metric, an *unweighted* and a *weighted* version. The unweighted versions are defined as follows:
 
-+ Cluster precision. Of tweets returned by the system, how many *distinct* semantic clusters are represented? To be precise, the denominator of the precision calculation is the total number of results returned by the system. Thus, the system does not get "credit" for retrieving multiple tweets from the same semantic cluster (in fact, redundant tweets lower precision).
-+ Cluster recall. Of the semantic clusters discovered by the assessor, how many are represented in the system's output? As with the precision calculation, the system does not get "credit" for retrieving multiple tweets from the same semantic cluster.
++ **Cluster precision (unweighted).** Of tweets returned by the system, how many *distinct* semantic clusters are represented? To be precise, the denominator of the precision calculation is the total number of results returned by the system. Thus, the system does not get "credit" for retrieving multiple tweets from the same semantic cluster (in fact, redundant tweets lower precision).
++ **Cluster recall (unweighted).** Of the semantic clusters discovered by the assessor, how many are represented in the system's output? As with the precision calculation, the system does not get "credit" for retrieving multiple tweets from the same semantic cluster.
 
-The F1 metric combines precision and recall [in the usual way](http://en.wikipedia.org/wiki/F1_score).
+For summary purposes, precision and recall will be combined into the F1 metric [in the usual way](http://en.wikipedia.org/wiki/F1_score).
 
 The TTG output of a system should use the same format as the ad hoc task (i.e., standard TREC format), although note that the rank and score fields are essentially ignored.
 
