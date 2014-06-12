@@ -22,7 +22,7 @@ In order to participate in the TREC 2014 Microblog track, you need to register t
 
 The Microblog track in 2014 will use the "evaluation as a service" (EaaS) model (more below), where teams interact with the official corpus via a common API. Thus, you need to request access to the API via the following steps:
 
-**Note**: If you participated in TREC 2013 and already have access to the API, you do not need to do anything. You can continue accessing the API as before.
+**Note**: If you participated in TREC 2013 and already have access to the API, you do not need to do anything. You can continue accessing the API as before.  Otherwise:
 
 1. Fill out the [API usage agreement](http://lintool.github.io/twitter-tools/API-agreement.pdf).
 2. Email the usage agreement to `microblog-request@nist.gov`.
